@@ -1,0 +1,10 @@
+:root {
+    --z-normal: 1;
+    --z-dropdown: 10;
+    --z-sticky: 20;
+    --z-fixed: 30;
+    --z-modal: 40;
+    --z-popover: 50;
+    --z-toast: 60;
+    --z-max: 9999;
+}

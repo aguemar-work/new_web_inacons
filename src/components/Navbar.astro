@@ -1,0 +1,123 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<header class="header" data-header>
+    <div class="nav-container">
+        <a href="/" class="logo">
+            <img src="/images/logo.svg" alt="Inacons Logo" />
+        </a>
+
+        <nav class="nav-desktop">
+            <ul>
+                <li>
+                    <a href="/" class={currentPath === "/" ? "active" : ""}
+                        >Inicio</a>
+                </li>
+
+                <li>
+                    <a
+                        href="/nosotros"
+                        class={currentPath.includes("/nosotros")
+                            ? "active"
+                            : ""}>Nosotros</a>
+                </li>
+
+                <li class="has-dropdown">
+                    <button class="dropdown-trigger">
+                        Operaciones
+                        <span class="chevron">▼</span>
+                    </button>
+                    <ul class="dropdown">
+                        <li>
+                            <a href="/operaciones/obras-civiles"
+                                >Obras Civiles</a>
+                        </li>
+                        <li>
+                            <a href="/operaciones/infraestructura"
+                                >Infraestructura</a>
+                        </li>
+                        <li>
+                            <a href="/operaciones/electromecanica"
+                                >Electromecánica</a>
+                        </li>
+                        <li>
+                            <a href="/operaciones/paisajismo">Paisajismo</a>
+                        </li>
+                        <li><a href="/operaciones/mineria">Minería</a></li>
+                        <li>
+                            <a href="/operaciones/consultoria">Consultoría</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a
+                        href="/proyectos"
+                        class={currentPath.includes("/proyectos")
+                            ? "active"
+                            : ""}>Proyectos</a>
+                </li>
+
+                <li>
+                    <a
+                        href="/sostenibilidad"
+                        class={currentPath.includes("/sostenibilidad")
+                            ? "active"
+                            : ""}>Sostenibilidad</a>
+                </li>
+
+                <li>
+                    <a
+                        href="/documentacion"
+                        class={currentPath.includes("/documentacion")
+                            ? "active"
+                            : ""}>Documentación</a>
+                </li>
+
+                <li>
+                    <a
+                        href="/certificacion"
+                        class={currentPath.includes("/certificacion")
+                            ? "active"
+                            : ""}>Certificación</a>
+                </li>
+
+                <li>
+                    <a
+                        href="/contacto"
+                        class={currentPath.includes("/contacto")
+                            ? "active"
+                            : ""}>Contacto</a>
+                </li>
+            </ul>
+        </nav>
+
+        <button class="menu-btn" data-menu-btn>
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<script>
+    let lastScroll = 0;
+    const header = document.querySelector("[data-header]");
+
+    window.addEventListener("scroll", () => {
+        const current = window.scrollY;
+
+        if (current <= 0) {
+            header.classList.remove("hidden", "scrolled");
+            return;
+        }
+
+        if (current > lastScroll) {
+            header.classList.add("hidden");
+        } else {
+            header.classList.remove("hidden");
+            header.classList.add("scrolled");
+        }
+
+        lastScroll = current;
+    });
+</script>

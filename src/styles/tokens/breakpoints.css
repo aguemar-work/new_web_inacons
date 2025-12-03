@@ -1,0 +1,12 @@
+:root {
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+
+    /* alias para media queries */
+    --screen-sm: var(--breakpoint-sm);
+    --screen-md: var(--breakpoint-md);
+    --screen-lg: var(--breakpoint-lg);
+    --screen-xl: var(--breakpoint-xl);
+}

@@ -1,0 +1,15 @@
+:root {
+    --font-primary: "Montserrat", sans-serif;
+    --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.8rem);
+    --text-sm: clamp(0.875rem, 0.8rem + 0.2vw, 0.9rem);
+    --text-base: clamp(1rem, 0.9rem + 0.3vw, 1.1rem);
+    --text-lg: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.2rem + 0.6vw, 1.875rem);
+    --text-3xl: clamp(1.875rem, 1.5rem + 1vw, 2.25rem);
+    --text-4xl: clamp(2.25rem, 1.8rem + 1.3vw, 3rem);
+
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+}

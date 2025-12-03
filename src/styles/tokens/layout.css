@@ -1,0 +1,5 @@
+:root {
+    --container-max: 1200px;
+    --content-width: 65ch;
+    --gutter: var(--space-4);
+}

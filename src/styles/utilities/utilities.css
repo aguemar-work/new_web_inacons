@@ -1,0 +1,36 @@
+/* utilidades: flex, grid, etc */
+/* GRID UTILITIES */
+.u-grid {
+    display: grid;
+    gap: var(--grid-gap);
+}
+
+.u-grid--sm {
+    gap: var(--grid-gap-sm);
+}
+
+.u-grid--lg {
+    gap: var(--grid-gap-lg);
+}
+
+.u-grid--no-gap {
+    gap: 0;
+}
+
+/* FLEX UTILITIES */
+.u-flex {
+    display: flex;
+    gap: var(--grid-gap);
+}
+
+.u-flex--sm {
+    gap: var(--grid-gap-sm);
+}
+
+.u-flex--lg {
+    gap: var(--grid-gap-lg);
+}
+
+.u-flex--no-gap {
+    gap: 0;
+}

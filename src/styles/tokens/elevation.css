@@ -1,0 +1,7 @@
+:root {
+    --elevation-0: var(--shadow-xs);
+    --elevation-1: var(--shadow-sm);
+    --elevation-2: var(--shadow-md);
+    --elevation-3: var(--shadow-lg);
+    --elevation-4: var(--shadow-xl);
+}

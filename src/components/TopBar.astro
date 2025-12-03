@@ -1,0 +1,174 @@
+---
+const contact = {
+    email: "info@inacons.com.pe",
+    phone: "+51 11234567",
+    whatsapp: "https://wa.me/51912345678",
+    intranet: "https://intranet.inacons.com.pe",
+};
+
+const social = [
+    { icon: "whatsapp", url: "https://wa.me/51912345678", label: "WhatsApp" },
+    {
+        icon: "facebook-f",
+        url: "https://facebook.com/inacons",
+        label: "Facebook",
+    },
+    {
+        icon: "linkedin-in",
+        url: "https://linkedin.com/company/inacons",
+        label: "LinkedIn",
+    },
+];
+---
+
+<aside class="topbar" id="topbar">
+    <div class="topbar__container">
+        <!-- Contacto -->
+        <nav class="topbar__contact" aria-label="Información de contacto">
+            <a href={`mailto:${contact.email}`} class="topbar__item">
+                <i class="fas fa-envelope"></i>
+                <span>{contact.email}</span>
+            </a>
+
+            <a href={`tel:${contact.phone}`} class="topbar__item">
+                <i class="fas fa-phone-alt"></i>
+                <span>{contact.phone}</span>
+            </a>
+        </nav>
+
+        <!-- Redes + Intranet -->
+        <nav class="topbar__actions" aria-label="Accesos rápidos">
+            <div class="topbar__social">
+                {
+                    social.map((s) => (
+                        <a
+                            href={s.url}
+                            class="topbar__social-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={s.label}
+                        >
+                            <i class={`fab fa-${s.icon}`} />
+                        </a>
+                    ))
+                }
+            </div>
+
+            <a
+                href={contact.intranet}
+                class="topbar__intranet"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Acceder al Intranet"
+            >
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Intranet</span>
+            </a>
+        </nav>
+    </div>
+</aside>
+
+<style>
+    :root {
+        --topbar-bg: #14172d;
+        --topbar-height: 40px;
+        --transition: 0.25s ease;
+    }
+
+    /* ---- Wrapper ---- */
+    .topbar {
+        background: var(--topbar-bg);
+        color: #fff;
+        height: var(--topbar-height);
+        display: flex;
+        align-items: center;
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 1001;
+        transition: transform var(--transition);
+        font-size: 0.875rem;
+    }
+
+    .topbar--hidden {
+        transform: translateY(-100%);
+    }
+
+    .topbar__container {
+        max-width: 1200px;
+        width: 100%;
+        padding: 0 20px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* ---- Items ---- */
+    .topbar__item,
+    .topbar__intranet,
+    .topbar__social-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: inherit;
+        text-decoration: none;
+        opacity: 0.9;
+        transition:
+            opacity var(--transition),
+            transform var(--transition);
+    }
+
+    .topbar__item:hover,
+    .topbar__social-link:hover,
+    .topbar__intranet:hover {
+        opacity: 1;
+        transform: translateY(-1px);
+    }
+
+    .topbar__contact {
+        display: flex;
+        gap: 20px;
+    }
+
+    .topbar__actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    /* Redes */
+    .topbar__social {
+        display: flex;
+        gap: 12px;
+    }
+
+    .topbar__social-link {
+        width: 20px;
+        height: 20px;
+        justify-content: center;
+    }
+
+    /* Intranet */
+    .topbar__intranet {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 4px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 3px;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 1024px) {
+        .topbar__item span,
+        .topbar__intranet span {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .topbar {
+            display: none;
+        }
+    }
+</style>

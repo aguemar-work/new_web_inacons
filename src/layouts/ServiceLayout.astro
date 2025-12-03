@@ -1,0 +1,43 @@
+---
+import PageLayout from "./PageLayout.astro";
+import HeroService from "../components/HeroService.astro";
+
+const { service } = Astro.props;
+---
+
+<PageLayout>
+    <HeroService
+        title={service.title}
+        description={service.description}
+        image={service.image}
+    />
+
+    <section class="service-section">
+        <div class="container service-content">
+            <slot />
+        </div>
+    </section>
+</PageLayout>
+
+<style>
+    .service-section {
+        padding: var(--section-padding);
+    }
+
+    .service-content {
+        display: grid;
+        gap: var(--space-8);
+        max-width: var(--breakpoint-xl);
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        .service-section {
+            padding: var(--section-padding-sm);
+        }
+
+        .service-content {
+            gap: var(--space-6);
+        }
+    }
+</style>

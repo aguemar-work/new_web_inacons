@@ -1,0 +1,21 @@
+/* alias globales para usar en componente */
+:root {
+    /* Backgrounds */
+    --background-default: var(--color-gray-50);
+    --background-surface: var(--color-gray-100);
+
+    /* Text */
+    --text-primary: var(--color-gray-900);
+    --text-secondary: var(--color-gray-600);
+
+    /* Brand */
+    --brand: var(--color-brand-primary);
+    --brand-hover: var(--color-brand-secondary);
+
+    /* Radii */
+    --radius-card: var(--radius-lg);
+    --radius-button: var(--radius-md);
+
+    /* Shadows */
+    --shadow-card: var(--shadow-lg);
+}
