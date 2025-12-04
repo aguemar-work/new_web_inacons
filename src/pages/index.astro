@@ -1,7 +1,26 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroPage from "../components/HeroPage.astro";
 ---
 
 <BaseLayout>
-    <h1>Inicio</h1>
+    <HeroPage
+        variant="home"
+        title="CONSTRUIMOS CONFIANZA INNOVAMOS ESPACIOS TRASCENDEMOS JUNTOS"
+        subtitle="Con más de 15 años de experiencia, INACONS es líder en construcción e ingeniería en Perú."
+        content="Conoce nuestra historia y valores."
+        background={{
+            type: "video",
+            src: "/videos/hero.mp4",
+            alt: "Hero Video",
+            poster: "/images/hero/hero_poster.webp",
+        }}
+        indicators={[
+            { label: "Años de experiencia", value: "15 años" },
+            { label: "KM2 CONSTRUIDOS", value: "150" },
+            { label: "MM DE INVERSION", value: "100" },
+            { label: "PROFESIONALES", value: "100" },
+        ]}
+        fullHeight={true}
+    />
 </BaseLayout>

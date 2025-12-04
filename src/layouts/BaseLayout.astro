@@ -1,7 +1,24 @@
 ---
-import "../styles/global.css";
 import TopBar from "../components/TopBar.astro";
 import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonical?: string;
+	image?: string;
+	showHero?: boolean;
+	heroTitle?: string;
+	heroSubtitle?: string;
+	heroDescription?: string;
+	heroImage?: string;
+	compact?: boolean;
+	noPadding?: boolean;
+	locale?: string;
+	twitter?: string;
+}
 
 const {
 	title = "INACONS - Empresa Constructora | Obras, Ingeniería y Mantenimiento",
@@ -10,6 +27,13 @@ const {
 	image = "https://inacons.com.pe/assets/images/og-image.jpg",
 	locale = "es_PE",
 	twitter = "@inacons",
+	showHero = false,
+	heroTitle = "",
+	heroSubtitle = "",
+	heroDescription = "",
+	heroImage = "",
+	compact = false,
+	noPadding = false,
 } = Astro.props;
 ---
 
@@ -20,8 +44,10 @@ const {
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<title>{title}</title>
+		<meta name="author" content="INACONS" />
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
+		<meta name="robots" content="index, follow" />
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
@@ -40,12 +66,8 @@ const {
 		<meta name="twitter:image" content={image} />
 
 		<!-- Favicon -->
-		<link
-			rel="icon"
-			type="image/png"
-			href="/assets/favicon/favicon-32x32.png"
-		/>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/images/favicon-32x32.png" />
+		<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
 
 		<!-- Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -65,9 +87,6 @@ const {
 		</noscript>
 
 		<!-- Styles -->
-		<link rel="stylesheet" href="/styles/reset.css" />
-		<link rel="stylesheet" href="/styles/tokens/tokens.css" />
-		<link rel="stylesheet" href="/styles/global.css" />
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -82,6 +101,37 @@ const {
 	<body class="layout-body">
 		<TopBar />
 		<Navbar />
-		<slot />
+		<main
+			class:list={[
+				"main-content",
+				compact && "main-content--compact",
+				noPadding && "main-content--no-padding",
+			]}
+		>
+			{
+				showHero && heroTitle && (
+					<section class="service-hero">
+						<div class="container">
+							<h1 class="service-hero__title">{heroTitle}</h1>
+							{heroSubtitle && (
+								<p class="service-hero__subtitle">
+									{heroSubtitle}
+								</p>
+							)}
+							{heroDescription && (
+								<p class="service-hero__description">
+									{heroDescription}
+								</p>
+							)}
+							{heroImage && (
+								<img src={heroImage} alt="" loading="lazy" />
+							)}
+						</div>
+					</section>
+				)
+			}
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>

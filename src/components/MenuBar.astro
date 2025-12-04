@@ -1,0 +1,426 @@
+---
+// src/components/MenuBar.astro (Mobile only)
+import { navItems } from "../data/navigation";
+const currentPath = Astro.url.pathname;
+
+const isActive = (href: string): boolean => {
+    if (href === "/") return currentPath === "/";
+    return currentPath === href || currentPath.startsWith(`${href}/`);
+};
+---
+
+<div class="mobile-header" data-mobile-header>
+    <!-- Botón hamburguesa -->
+    <button
+        class="mobile-toggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-mobile-toggle
+    >
+        <span class="toggle-bar" aria-hidden="true"></span>
+        <span class="toggle-bar" aria-hidden="true"></span>
+        <span class="toggle-bar" aria-hidden="true"></span>
+    </button>
+
+    <!-- Logo móvil -->
+    <a href="/" class="mobile-logo">
+        <img
+            src="/images/logo_inacons_dark.svg"
+            alt="Inacons"
+            width="120"
+            height="40"
+            loading="eager"
+        />
+    </a>
+
+    <!-- Espacio para balancear flexbox (opcional botón derecho) -->
+    <div class="mobile-spacer"></div>
+</div>
+
+<!-- Menú móvil overlay -->
+<div
+    class="mobile-menu-overlay"
+    id="mobile-menu"
+    aria-hidden="true"
+    data-mobile-menu
+>
+    <div class="mobile-menu-container">
+        <!-- Header del menú móvil -->
+        <div class="mobile-menu-header">
+            <a href="/" class="mobile-menu-logo">
+                <img
+                    src="/images/logo_inacons_dark.svg"
+                    alt="Inacons"
+                    width="140"
+                    height="46"
+                />
+            </a>
+            <button
+                class="mobile-close"
+                aria-label="Cerrar menú"
+                data-mobile-close
+            >
+                <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                        fill="currentColor"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Navegación móvil -->
+        <nav class="mobile-nav" aria-label="Navegación móvil">
+            <ul>
+                {
+                    navItems.map((item) => (
+                        <li>
+                            <a
+                                href={item.href}
+                                class={`mobile-nav-link ${isActive(item.href) ? "active" : ""}`}
+                                aria-current={
+                                    isActive(item.href) ? "page" : undefined
+                                }
+                                data-mobile-link
+                            >
+                                {item.label}
+                                {item.children && (
+                                    <svg
+                                        class="mobile-arrow"
+                                        width="16"
+                                        height="16"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            d="M8 12l-4-4h8z"
+                                            fill="currentColor"
+                                        />
+                                    </svg>
+                                )}
+                            </a>
+
+                            {item.children && (
+                                <ul class="mobile-submenu">
+                                    {item.children.map((child) => (
+                                        <li>
+                                            <a
+                                                href={child.href}
+                                                class={`mobile-submenu-link ${isActive(child.href) ? "active" : ""}`}
+                                                aria-current={
+                                                    isActive(child.href)
+                                                        ? "page"
+                                                        : undefined
+                                                }
+                                            >
+                                                {child.label}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
+
+        <!-- Info de contacto en móvil (opcional) -->
+        <div class="mobile-contact">
+            <a href="tel:+51123456789" class="mobile-phone">
+                <svg width="20" height="20" aria-hidden="true">
+                    <path
+                        d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.61 21 3 14.39 3 6c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                        fill="currentColor"></path>
+                </svg>
+                +51 123 456 789
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JS mínimo para menú móvil
+    (() => {
+        "use strict";
+
+        const mobileToggle = document.querySelector("[data-mobile-toggle]");
+        const mobileClose = document.querySelector("[data-mobile-close]");
+        const mobileMenu = document.querySelector("[data-mobile-menu]");
+        const mobileLinks = document.querySelectorAll("[data-mobile-link]");
+        const body = document.body;
+
+        const openMenu = () => {
+            mobileToggle.setAttribute("aria-expanded", "true");
+            mobileMenu.setAttribute("aria-hidden", "false");
+            body.style.overflow = "hidden";
+        };
+
+        const closeMenu = () => {
+            mobileToggle.setAttribute("aria-expanded", "false");
+            mobileMenu.setAttribute("aria-hidden", "true");
+            body.style.overflow = "";
+        };
+
+        // Abrir menú
+        mobileToggle?.addEventListener("click", openMenu);
+
+        // Cerrar menú
+        mobileClose?.addEventListener("click", closeMenu);
+
+        // Cerrar al hacer clic en enlace
+        mobileLinks.forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
+
+        // Cerrar al hacer clic fuera del menú
+        mobileMenu?.addEventListener("click", (e) => {
+            if (e.target === mobileMenu) {
+                closeMenu();
+            }
+        });
+
+        // Cerrar con Escape
+        document.addEventListener("keydown", (e) => {
+            if (
+                e.key === "Escape" &&
+                mobileMenu.getAttribute("aria-hidden") === "false"
+            ) {
+                closeMenu();
+            }
+        });
+    })();
+</script>
+
+<style>
+    /* ===== MENU BAR MOBILE ONLY ===== */
+    /* Ocultar completamente en desktop */
+    @media (min-width: 1024px) {
+        .mobile-header,
+        .mobile-menu-overlay {
+            display: none !important;
+        }
+    }
+
+    /* ===== MOBILE HEADER (Barra superior) ===== */
+    .mobile-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .mobile-toggle {
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .toggle-bar {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #1a1a1a;
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
+    }
+
+    [aria-expanded="true"] .toggle-bar:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+
+    [aria-expanded="true"] .toggle-bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    [aria-expanded="true"] .toggle-bar:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+
+    .mobile-logo img {
+        height: 40px;
+        width: auto;
+    }
+
+    .mobile-spacer {
+        width: 32px; /* Igual que el botón para balancear */
+    }
+
+    /* ===== MOBILE MENU OVERLAY ===== */
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+    }
+
+    .mobile-menu-overlay[aria-hidden="false"] {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mobile-menu-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 90%;
+        max-width: 400px;
+        height: 100%;
+        background: white;
+        transform: translateX(100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .mobile-menu-overlay[aria-hidden="false"] .mobile-menu-container {
+        transform: translateX(0);
+    }
+
+    /* Header del menú */
+    .mobile-menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem;
+        border-bottom: 1px solid #eee;
+    }
+
+    .mobile-menu-logo img {
+        height: 46px;
+        width: auto;
+    }
+
+    .mobile-close {
+        width: 40px;
+        height: 40px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: #666;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Navegación móvil */
+    .mobile-nav {
+        flex: 1;
+        padding: 1.5rem;
+    }
+
+    .mobile-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .mobile-nav > ul > li {
+        border-bottom: 1px solid #eee;
+    }
+
+    .mobile-nav-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        color: #1a1a1a;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.125rem;
+    }
+
+    .mobile-nav-link.active {
+        color: var(--color-primary, #0066cc);
+    }
+
+    .mobile-arrow {
+        transition: transform 0.3s ease;
+    }
+
+    /* Submenú móvil */
+    .mobile-submenu {
+        list-style: none;
+        margin: 0 0 1rem 1rem;
+        padding: 0;
+        display: none;
+    }
+
+    .mobile-nav-link.active + .mobile-submenu {
+        display: block;
+    }
+
+    .mobile-submenu-link {
+        display: block;
+        padding: 0.75rem 0;
+        color: #666;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+
+    .mobile-submenu-link.active {
+        color: var(--color-primary, #0066cc);
+        font-weight: 500;
+    }
+
+    /* Contacto móvil */
+    .mobile-contact {
+        padding: 1.5rem;
+        border-top: 1px solid #eee;
+    }
+
+    .mobile-phone {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: #1a1a1a;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    /* ===== RESPONSIVE ADICIONAL ===== */
+    @media (max-width: 480px) {
+        .mobile-header {
+            padding: 0.5rem 1rem;
+        }
+
+        .mobile-menu-container {
+            width: 100%;
+            max-width: none;
+        }
+
+        .mobile-menu-header,
+        .mobile-nav,
+        .mobile-contact {
+            padding: 1rem;
+        }
+    }
+</style>

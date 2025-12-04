@@ -1,19 +1,20 @@
 ---
-import PageLayout from "../layouts/PageLayout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroPage from "../components/HeroPage.astro";
 ---
 
-<PageLayout
-    title="Nosotros | INACONS - Nuestra historia y valores"
-    description="Con más de 15 años de experiencia, INACONS es lider en construcción e ingeniría en Perú. Conoce nuestra historia y valores."
-    og:title="Sobre Nosotros - INACONS"
-    og:description="Con más de 15 años de experiencia, INACONS es lider en construcción e ingeniría en Perú. Conoce nuestra historia y valores."
-    og:image="/assets/images/nosotros.jpg"
-    canonical="https://inacons.com.pe/nosotros"
->
+<BaseLayout>
     <HeroPage
+        variant="page"
         title="Nosotros"
-        description="Con más de 15 años de experiencia, INACONS es lider en construcción e ingeniría en Perú. Conoce nuestra historia y valores."
-        image="/assets/images/nosotros.jpg"
+        subtitle="Con más de 15 años de experiencia, INACONS es lider en construcción e ingeniría en Perú. Conoce nuestra historia y valores."
+        content="<p>Somos INACONS, una empresa con más de 15 años de experiencia en ingeniería y construcción en el Perú. Desarrollamos proyectos de alta complejidad con los más altos estándares de calidad, seguridad y sostenibilidad.</p> <p>Nuestro equipo multidisciplinario, conformado por más de 200 profesionales, nos permite ofrecer soluciones especializadas y cumplir con nuestra misión: transformar espacios y construir confianza en cada proyecto.</p>"
+        background={{
+            type: "image",
+            src: "/images/image_nosotros.webp",
+            alt: "Nosotros",
+        }}
+        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
+        fullHeight={false}
     />
-</PageLayout>
+</BaseLayout>

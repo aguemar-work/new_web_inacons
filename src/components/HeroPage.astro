@@ -1,1 +1,202 @@
-<!-- HeroPage genérico -->
+---
+interface Props {
+    variant: "home" | "service" | "page";
+    title: string;
+    subtitle?: string;
+    content?: string;
+    breadcrumbs?: Array<{ label: string; url?: string }>;
+    background?: {
+        type: "video" | "image";
+        src: string;
+        alt?: string;
+        poster?: string; // solo para video
+    };
+    indicators?: Array<{ label: string; value: string }>;
+    fullHeight?: boolean;
+}
+
+const {
+    variant = "page",
+    title,
+    subtitle,
+    content,
+    breadcrumbs = [],
+    background,
+    indicators = [],
+    fullHeight = false,
+} = Astro.props;
+
+const variantClass = `hero--${variant}`;
+const heightClass = fullHeight ? "hero--full-height" : "";
+---
+
+<section
+    class:list={["hero", variantClass, heightClass]}
+    aria-labelledby="hero-title"
+>
+    {
+        background && background.type === "video" && (
+            <div class="hero__background hero__background--video">
+                <video
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    preload="metadata"
+                    poster={background.poster}
+                    aria-hidden="true"
+                >
+                    <source src={background.src} type="video/mp4" />
+                </video>
+                <div class="hero__overlay" />
+            </div>
+        )
+    }
+    {
+        background && background.type === "image" && (
+            <div class="hero__background hero__background--image">
+                <img
+                    src={background.src}
+                    alt={background.alt || ""}
+                    loading="eager"
+                    decoding="async"
+                    aria-hidden="true"
+                />
+                <div class="hero__overlay" />
+            </div>
+        )
+    }
+
+    <div class="container hero__container">
+        {
+            ["page", "service"].includes(variant) && breadcrumbs.length > 0 && (
+                <nav aria-label="Ruta de navegación" class="hero__breadcrumbs">
+                    <ol>
+                        {breadcrumbs.map((item, index) => (
+                            <li>
+                                {item.url ? (
+                                    <a href={item.url}>{item.label}</a>
+                                ) : (
+                                    <span>{item.label}</span>
+                                )}
+                                {index < breadcrumbs.length - 1 && (
+                                    <span class="hero__breadcrumbs__separator">
+                                        /
+                                    </span>
+                                )}
+                            </li>
+                        ))}
+                    </ol>
+                </nav>
+            )
+        }
+        <div class="hero__content">
+            {
+                variant === "home" && (
+                    <div class="hero__home-content">
+                        <h1 id="hero-title" class="hero__title">
+                            {title}
+                        </h1>
+                        {subtitle && <p class="hero__subtitle">{subtitle}</p>}
+                    </div>
+                )
+            }
+            {
+                variant === "page" && (
+                    <div class="hero__grid">
+                        <div class="hero__col-left">
+                            <h1 id="hero-title" class="hero__title">
+                                {title}
+                            </h1>
+                            {subtitle && (
+                                <p class="hero__subtitle">{subtitle}</p>
+                            )}
+                        </div>
+                        <div class="hero__col-right">
+                            {content && <p class="hero__content">{content}</p>}
+                        </div>
+                    </div>
+                )
+            }
+            {
+                variant === "service" && (
+                    <div class="hero__service-content">
+                        <h1 id="hero-title" class="hero__title">
+                            {title}
+                        </h1>
+                        {subtitle && <p class="hero__subtitle">{subtitle}</p>}
+                    </div>
+                )
+            }
+        </div>
+        {
+            variant === "home" && indicators.length > 0 && (
+                <div class="hero__indicators">
+                    {indicators.map((indicator) => (
+                        <div class="hero__indicator">
+                            <span class="indicator__value">
+                                {indicator.value}
+                            </span>
+                            <span class="indicator__label">
+                                {indicator.label}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            )
+        }
+    </div>
+</section>
+
+<style>
+    .hero__background {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .hero__background--video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -2;
+    }
+    .hero__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            rgba(20, 23, 45, 0.6) 25%,
+            rgba(20, 23, 45, 0.75) 50%,
+            rgba(20, 23, 45, 1) 95%
+        );
+        z-index: 1;
+    }
+
+    .hero__content {
+        text-align: center;
+        color: var(--color-gray-50);
+        z-index: 2;
+        padding: 0 var(--space-8);
+    }
+
+    .hero__title {
+        font-size: var(--title-hero);
+        font-weight: var(--font-weight-bold);
+        text-transform: uppercase;
+        line-height: 1.2;
+        margin-bottom: var(--space-5);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+</style>
