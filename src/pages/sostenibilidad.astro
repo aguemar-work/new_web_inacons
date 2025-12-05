@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroPage from "../components/HeroPage.astro";
+---
+
+<BaseLayout>
+    <HeroPage
+        variant="page"
+        title="Lideramos con Ingeniería que Regenera y Optimiza"
+        subtitle="NUESTRO COMPROMISO"
+        content={"En INACONS, la sostenibilidad no es un departamento; es el principio rector de nuestra ingeniería. Aplicamos innovación tecnológica de vanguardia en cada proyecto minero y de construcción para una misión dual: optimizar recursos al máximo y regenerar los ecosistemas que intervenimos. Este compromiso se materializa en soluciones personalizadas que no solo responden a los desafíos técnicos del presente, sino que construyen activamente un legado ambiental positivo para el futuro."}
+        background={{
+            type: "image",
+            src: "/images/image_nosotros.webp",
+            alt: "Nosotros",
+        }}
+        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
+    />
+</BaseLayout>

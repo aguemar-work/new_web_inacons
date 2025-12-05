@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroPage from "../../components/HeroPage.astro";
+---
+
+<BaseLayout>
+    <HeroPage
+        variant="page"
+        title="Valor Agregado en Cada Fase del Proyecto"
+        subtitle="QUÉ HACEMOS"
+        content={"En INACONS, transformamos conceptos en realidad con calidad excepcional, seguridad y eficiencia probada. Guiamos cada proyecto desde la asesoría técnica inicial hasta la implementación final de soluciones complejas, asegurando que cada etapa no solo cumpla con los planos, sino que construya valor tangible y consolide la confianza con nuestros clientes."}
+        background={{
+            type: "image",
+            src: "/images/image_nosotros.webp",
+            alt: "Nosotros",
+        }}
+        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
+    />
+</BaseLayout>

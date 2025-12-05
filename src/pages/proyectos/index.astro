@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroPage from "../../components/HeroPage.astro";
+---
+
+<BaseLayout>
+    <HeroPage
+        variant="page"
+        title=" Ingeniería que Supera el Terreno"
+        subtitle="NUESTRA TRAYECTORIA"
+        content={"Desarrollamos proyectos de construcción y minería en las geografías más exigentes del Perú, desde la costa árida hasta las alturas de la sierra. Adaptamos soluciones ingenieriles robustas a cada condición climática y logística. Un portafolio de más de 150 proyectos exitosos avala nuestra capacidad comprobada para superar cualquier reto, siempre bajo el estándar inquebrantable de INACONS: calidad y seguridad supremas en cada metro cuadrado."}
+        background={{
+            type: "image",
+            src: "/images/image_nosotros.webp",
+            alt: "Nosotros",
+        }}
+        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
+    />
+</BaseLayout>

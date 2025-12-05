@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroPage from "../components/HeroPage.astro";
+---
+
+<BaseLayout>
+    <HeroPage
+        variant="page"
+        title=" Documentos que Rigen Nuestras Operaciones"
+        subtitle="TRANSPARENCIA Y COMPROMISO"
+        content={"Como parte de nuestro compromiso con la integridad y las mejores prácticas, ponemos a su disposición nuestro conjunto de documentos corporativos. Aquí encontrará las políticas, certificaciones y protocolos que estructuran nuestro trabajo, asegurando que cada decisión y acción en proyectos de ingeniería y construcción se rija por los principios de seguridad, ética y excelencia que nos definen."}
+        background={{
+            type: "image",
+            src: "/images/image_nosotros.webp",
+            alt: "Nosotros",
+        }}
+        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
+    />
+</BaseLayout>

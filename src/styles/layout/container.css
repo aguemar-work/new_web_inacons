@@ -1,3 +1,7 @@
+:root {
+    --container-padding: var(--space-6);
+}
+
 .container {
     width: 100%;
     max-width: 1440px;

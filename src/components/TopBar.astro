@@ -22,7 +22,7 @@ const social = [
 ---
 
 <aside class="topbar" id="topbar">
-    <div class="topbar__container">
+    <div class="container topbar__container">
         <!-- Contacto -->
         <nav class="topbar__contact" aria-label="Información de contacto">
             <a href={`mailto:${contact.email}`} class="topbar__item">
@@ -94,9 +94,6 @@ const social = [
     }
 
     .topbar__container {
-        max-width: 1440px;
-        width: 100%;
-        margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
