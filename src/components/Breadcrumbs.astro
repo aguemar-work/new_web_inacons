@@ -1,0 +1,81 @@
+---
+interface Props {
+    items: Array<{ label: string; url?: string }>;
+    class?: string;
+}
+
+const { items, class: className } = Astro.props;
+---
+
+<nav class:list={["breadcrumbs", className]} aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list">
+        {
+            items.map((item, index) => (
+                <li class="breadcrumbs__item">
+                    {item.url ? (
+                        <a href={item.url} class="breadcrumbs__link">
+                            {item.label}
+                        </a>
+                    ) : (
+                        <span class="breadcrumbs__current" aria-current="page">
+                            {item.label}
+                        </span>
+                    )}
+                    {index < items.length - 1 && (
+                        <span class="breadcrumbs__separator" aria-hidden="true">
+                            /
+                        </span>
+                    )}
+                </li>
+            ))
+        }
+    </ol>
+</nav>
+
+<style>
+    .breadcrumbs {
+        font-size: 0.875rem; /* text-sm */
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-text-inverse, #ffffff); /* Fallback to white */
+    }
+
+    .breadcrumbs__list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .breadcrumbs__item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .breadcrumbs__link {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition:
+            color 0.2s ease,
+            opacity 0.2s ease;
+    }
+
+    .breadcrumbs__link:hover {
+        color: var(--color-brand-accent, #ffcc00);
+        opacity: 1;
+    }
+
+    .breadcrumbs__current {
+        color: #ffffff;
+        font-weight: 700;
+    }
+
+    .breadcrumbs__separator {
+        color: rgba(255, 255, 255, 0.4);
+    }
+</style>

@@ -94,8 +94,9 @@ const isActive = (href: string): boolean => {
   (() => {
     'use strict';
     
-    // 1. Scroll Logic
-    const header = document.querySelector('[data-header]');
+    const header = document.getElementById('main-header');
+    const topbar = document.getElementById('topbar');
+    
     if (!header) return;
     
     let lastScrollY = window.scrollY;
@@ -103,19 +104,32 @@ const isActive = (href: string): boolean => {
     
     const updateHeader = () => {
       const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollY;
+      const scrollDelta = Math.abs(currentScrollY - lastScrollY);
       
-      if (currentScrollY <= 10) {
+      // Regla 3: Top del documento (Estado Inicial)
+      if (currentScrollY <= 0) {
+        // Mostrar ambos
+        header.classList.remove('header--hidden', 'header--sticky');
         header.classList.add('header--top');
-        header.classList.remove('header--scrolled');
-        header.classList.remove('header--hidden');
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        topbar?.classList.remove('topbar--hidden');
+      }
+      // Regla 1: Scroll Down (Ocultar todo)
+      else if (isScrollingDown && currentScrollY > 10) {
         header.classList.remove('header--top');
-        header.classList.add('header--scrolled');
         header.classList.add('header--hidden');
-      } else {
-        header.classList.remove('header--top');
-        header.classList.add('header--scrolled');
-        header.classList.remove('header--hidden');
+        header.classList.remove('header--sticky');
+        topbar?.classList.add('topbar--hidden');
+      }
+      // Regla 2: Scroll Up (Mostrar solo Navbar Sticky)
+      else if (!isScrollingDown && scrollDelta > 5) {
+        header.classList.remove('header--top', 'header--hidden');
+        header.classList.add('header--sticky');
+        
+        // Mantener TopBar oculto si no estamos en el top
+        if (currentScrollY > 0) {
+          topbar?.classList.add('topbar--hidden');
+        }
       }
       
       lastScrollY = currentScrollY;
@@ -129,10 +143,9 @@ const isActive = (href: string): boolean => {
       }
     };
     
-    if (window.innerWidth >= 1024) {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      updateHeader();
-    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Inicializar estado
+    updateHeader();
     
   })();
 </script>
@@ -147,7 +160,7 @@ const isActive = (href: string): boolean => {
   
   .header {
     position: fixed;
-    top: 0; /* Changed from 40px to 0 as per standard */
+    top: 40px; /* Debajo del TopBar */
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -155,13 +168,12 @@ const isActive = (href: string): boolean => {
       transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
       background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
       box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 1rem 0;
+    will-change: transform;
   }
   
   .nav-container {
     max-width: 1440px;
-    margin: 2rem auto;
-    padding: 0 2rem;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -189,30 +201,49 @@ const isActive = (href: string): boolean => {
   }
   
   /* ===== STATES ===== */
+  
+  /* 1. Initial State (Transparent, White Text) */
   .header--top {
     background-color: transparent;
     color: white;
     box-shadow: none;
+    transform: translateY(0);
   }
   
-  .header--scrolled {
+  /* 2. Sticky State (White BG, Dark Text, Moved to Top) */
+  .header--sticky {
     background-color: rgba(255, 255, 255, 0.98);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     color: #1a1a1a;
+    padding: 0.5rem 0;
+    transform: translateY(-40px); /* Move up to cover TopBar space */
   }
   
-  .header--scrolled .logo-light {
+  .header--sticky .logo-light {
     opacity: 0;
   }
   
-  .header--scrolled .logo-dark {
+  .header--sticky .logo-dark {
     opacity: 1;
   }
   
+  .header--sticky .desktop-nav a {
+    color: #1a1a1a;
+  }
+  
+  .header--sticky .desktop-nav a:hover,
+  .header--sticky .desktop-nav a.active {
+    color: var(--color-primary, #0066cc);
+  }
+
+  /* 3. Hidden State (Scroll Down) */
   .header--hidden {
-    transform: translateY(-100%);
+    transform: translateY(-200%); /* Move completely off screen */
+    /* Maintain styles of sticky/scrolled so it doesn't flash when appearing */
+    background-color: rgba(255, 255, 255, 0.98);
+    color: #1a1a1a;
   }
   
   /* ===== NAVIGATION ===== */
@@ -235,10 +266,6 @@ const isActive = (href: string): boolean => {
     gap: 0.375rem;
     position: relative;
     padding: 0.5rem 0;
-  }
-  
-  .header--scrolled .desktop-nav a {
-    color: #1a1a1a;
   }
   
   .desktop-nav a:hover,

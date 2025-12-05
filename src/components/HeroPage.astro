@@ -1,42 +1,51 @@
 ---
+import Breadcrumbs from "./Breadcrumbs.astro";
+
 interface Props {
-    variant: "home" | "service" | "page";
+    variant: "home" | "page" | "project";
     title: string;
     subtitle?: string;
-    content?: string;
+    description?: string;
+    content?: string; // Fallback for description if old prop used
     breadcrumbs?: Array<{ label: string; url?: string }>;
     background?: {
         type: "video" | "image";
         src: string;
+        poster?: string;
         alt?: string;
-        poster?: string; // solo para video
     };
-    indicators?: Array<{ label: string; value: string }>;
-    fullHeight?: boolean;
+    indicators?: Array<{ value: string; label: string; icon?: string }>;
 }
 
 const {
     variant = "page",
     title,
     subtitle,
+    description,
     content,
     breadcrumbs = [],
     background,
     indicators = [],
-    fullHeight = false,
 } = Astro.props;
 
-const variantClass = `hero--${variant}`;
-const heightClass = fullHeight ? "hero--full-height" : "";
+const desc = description || content;
+const isHome = variant === "home";
+const isPage = variant === "page";
+const isProject = variant === "project";
+
+// Determine Title Tag
+const TitleTag = "h1";
 ---
 
 <section
-    class:list={["hero", variantClass, heightClass]}
+    class:list={["hero", `hero--${variant}`]}
     aria-labelledby="hero-title"
+    role={isHome ? "banner" : "region"}
 >
-    {
-        background && background.type === "video" && (
-            <div class="hero__background hero__background--video">
+    <!-- Background Layer (Z-Index -2) -->
+    <div class="hero__background">
+        {
+            background?.type === "video" ? (
                 <video
                     autoplay
                     loop
@@ -45,103 +54,112 @@ const heightClass = fullHeight ? "hero--full-height" : "";
                     preload="metadata"
                     poster={background.poster}
                     aria-hidden="true"
+                    class="hero__video"
                 >
                     <source src={background.src} type="video/mp4" />
                 </video>
-                <div class="hero__overlay" />
-            </div>
-        )
-    }
-    {
-        background && background.type === "image" && (
-            <div class="hero__background hero__background--image">
+            ) : (
                 <img
-                    src={background.src}
-                    alt={background.alt || ""}
-                    loading="eager"
+                    src={background?.src}
+                    alt={background?.alt || ""}
+                    loading={isHome ? "eager" : "lazy"}
                     decoding="async"
                     aria-hidden="true"
+                    class="hero__image"
                 />
-                <div class="hero__overlay" />
-            </div>
-        )
-    }
-
-    <div class="container hero__container">
-        {
-            ["page", "service"].includes(variant) && breadcrumbs.length > 0 && (
-                <nav aria-label="Ruta de navegación" class="hero__breadcrumbs">
-                    <ol>
-                        {breadcrumbs.map((item, index) => (
-                            <li>
-                                {item.url ? (
-                                    <a href={item.url}>{item.label}</a>
-                                ) : (
-                                    <span>{item.label}</span>
-                                )}
-                                {index < breadcrumbs.length - 1 && (
-                                    <span class="hero__breadcrumbs__separator">
-                                        /
-                                    </span>
-                                )}
-                            </li>
-                        ))}
-                    </ol>
-                </nav>
             )
         }
-        <div class="hero__content">
-            {
-                variant === "home" && (
-                    <div class="hero__home-content">
-                        <h1 id="hero-title" class="hero__title">
-                            {title}
-                        </h1>
-                        {subtitle && <p class="hero__subtitle">{subtitle}</p>}
-                    </div>
-                )
-            }
-            {
-                variant === "page" && (
-                    <div class="hero__grid">
-                        <div class="hero__col-left">
-                            <h1 id="hero-title" class="hero__title">
-                                {title}
-                            </h1>
-                            {subtitle && (
-                                <p class="hero__subtitle">{subtitle}</p>
-                            )}
-                        </div>
-                        <div class="hero__col-right">
-                            {content && <p class="hero__content">{content}</p>}
-                        </div>
-                    </div>
-                )
-            }
-            {
-                variant === "service" && (
-                    <div class="hero__service-content">
-                        <h1 id="hero-title" class="hero__title">
-                            {title}
-                        </h1>
-                        {subtitle && <p class="hero__subtitle">{subtitle}</p>}
-                    </div>
-                )
-            }
-        </div>
+    </div>
+
+    <!-- Overlay Layer (Z-Index -1) -->
+    <div class="hero__overlay"></div>
+
+    <!-- Content Layer (Z-Index 10) -->
+    <div class="container hero__container">
         {
-            variant === "home" && indicators.length > 0 && (
-                <div class="hero__indicators">
-                    {indicators.map((indicator) => (
-                        <div class="hero__indicator">
-                            <span class="indicator__value">
-                                {indicator.value}
-                            </span>
-                            <span class="indicator__label">
-                                {indicator.label}
-                            </span>
+            /* --- 1. HOME HERO LAYOUT --- */
+            isHome && (
+                <div class="hero__content hero__content--home">
+                    <div class="hero__titles">
+                        <TitleTag
+                            id="hero-title"
+                            class="hero__title hero__title--home"
+                        >
+                            {/* Handle newlines in title manually or via CSS whitespace */}
+                            {title.split("\n").map((line) => (
+                                <span class="d-block">{line}</span>
+                            ))}
+                        </TitleTag>
+                        {subtitle && <p class="hero__subtitle">{subtitle}</p>}
+                    </div>
+
+                    {indicators.length > 0 && (
+                        <div class="hero__indicators">
+                            {indicators.map((indicator) => (
+                                <div class="indicator">
+                                    <span class="indicator__value">
+                                        {indicator.value}
+                                    </span>
+                                    <span class="indicator__label">
+                                        {indicator.label}
+                                    </span>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    )}
+                </div>
+            )
+        }
+
+        {
+            /* --- 2. PAGE HERO LAYOUT (Nosotros, Servicios, etc.) --- */
+            isPage && (
+                <div class="hero__content hero__content--page">
+                    <div class="hero__col-left">
+                        {breadcrumbs.length > 0 && (
+                            <Breadcrumbs
+                                items={breadcrumbs}
+                                class="hero__breadcrumbs"
+                            />
+                        )}
+
+                        {subtitle && (
+                            <span class="hero__subtitle-label">{subtitle}</span>
+                        )}
+
+                        <TitleTag
+                            id="hero-title"
+                            class="hero__title hero__title--page"
+                        >
+                            {title}
+                        </TitleTag>
+                    </div>
+
+                    <div class="hero__col-right">
+                        {desc && <p class="hero__description">{desc}</p>}
+                    </div>
+                </div>
+            )
+        }
+
+        {
+            /* --- 3. PROJECT/SERVICE HERO LAYOUT --- */
+            isProject && (
+                <div class="hero__content hero__content--project">
+                    <div class="hero__wrapper-project">
+                        {breadcrumbs.length > 0 && (
+                            <Breadcrumbs
+                                items={breadcrumbs}
+                                class="hero__breadcrumbs"
+                            />
+                        )}
+                        <TitleTag
+                            id="hero-title"
+                            class="hero__title hero__title--project"
+                        >
+                            {title}
+                        </TitleTag>
+                    </div>
                 </div>
             )
         }
@@ -149,24 +167,38 @@ const heightClass = fullHeight ? "hero--full-height" : "";
 </section>
 
 <style>
-    .hero__background {
+    /* --- Core Hero Styles --- */
+    .hero {
         position: relative;
         width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        /* height: 100vh; */
         overflow: hidden;
+        color: #ffffff;
+        --hero-overlay-opacity: 0.6;
+        isolation: isolate; /* Create new stacking context */
     }
-    .hero__background--video {
+
+    /* Background: Lowest Layer */
+    .hero__background {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
         z-index: -2;
     }
+
+    .hero__video,
+    .hero__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    /* Overlay: Middle Layer */
     .hero__overlay {
         position: absolute;
         top: 0;
@@ -178,25 +210,177 @@ const heightClass = fullHeight ? "hero--full-height" : "";
             rgba(20, 23, 45, 0.6) 25%,
             rgba(20, 23, 45, 0.75) 50%,
             rgba(20, 23, 45, 1) 95%
-        );
-        z-index: 1;
+        ); /* Adjusted gradient for better contrast */
+        z-index: -1;
+        pointer-events: none;
     }
 
-    .hero__content {
-        text-align: center;
-        color: var(--color-gray-50);
-        z-index: 2;
-        padding: 0 var(--space-8);
-    }
-
-    .hero__title {
-        font-size: var(--title-hero);
-        font-weight: var(--font-weight-bold);
-        text-transform: uppercase;
-        line-height: 1.2;
-        margin-bottom: var(--space-5);
+    /* Content: Top Layer */
+    .hero__container {
+        position: relative;
+        z-index: 10;
+        height: 100%;
         display: flex;
         flex-direction: column;
-        gap: var(--space-2);
+    }
+
+    /* --- Breadcrumbs Spacing --- */
+    .hero__breadcrumbs {
+        margin-bottom: 1rem;
+    }
+
+    /* --- Variant: HOME --- */
+    .hero--home {
+        height: 100vh;
+    }
+    .hero--home .hero__container {
+        justify-content: space-between;
+        padding-top: calc(var(--header-height, 80px) + 4rem);
+        padding-bottom: 3rem;
+    }
+    .hero__content--home {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: center;
+    }
+    .hero__titles {
+        margin-bottom: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+    }
+    .hero__title--home {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 800;
+        line-height: 1.1;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    .hero__title--home .d-block {
+        display: block;
+    }
+    .hero__subtitle {
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        max-width: 60ch;
+        opacity: 0.9;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Home Indicators */
+    .hero__indicators {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 2rem;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(4px);
+        padding: 1.5rem;
+        border-radius: var(--radius-lg, 8px);
+    }
+    .indicator {
+        display: flex;
+        flex-direction: column;
+    }
+    .indicator__value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-brand-accent, #ffcc00);
+    }
+    .indicator__label {
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        opacity: 0.9;
+        font-weight: 500;
+    }
+
+    @media (min-width: 768px) {
+        .hero__indicators {
+            grid-template-columns: repeat(4, 1fr);
+            background: transparent;
+            backdrop-filter: none;
+            padding: 2rem 0 0 0;
+        }
+    }
+
+    /* --- Variant: PAGE --- */
+    .hero--page {
+        height: auto;
+        min-height: 400px;
+        display: flex;
+        align-items: flex-end;
+        padding: calc(var(--header-height, 80px) + 2rem) 0 4rem 0;
+    }
+    .hero__content--page {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        width: 100%;
+    }
+    .hero__col-left {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .hero__subtitle-label {
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-brand-accent, #ffcc00);
+        margin-bottom: 0.5rem;
+    }
+    .hero__title--page {
+        font-size: clamp(2rem, 3.5vw, 3.5rem);
+        font-weight: 700;
+        line-height: 1.1;
+        text-transform: uppercase;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .hero__description {
+        font-size: 1.125rem;
+        line-height: 1.6;
+        max-width: 50ch;
+        border-left: 2px solid var(--color-brand-accent, #ffcc00);
+        padding-left: 1.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (min-width: 1024px) {
+        .hero__content--page {
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: flex-end;
+        }
+    }
+
+    /* --- Variant: PROJECT --- */
+    .hero--project {
+        height: auto;
+        min-height: 50vh;
+        display: flex;
+        align-items: flex-end;
+        padding: calc(var(--header-height, 80px) + 2rem) 0 4rem 0;
+    }
+    .hero__content--project {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .hero__wrapper-project {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 900px;
+    }
+    .hero__title--project {
+        font-size: clamp(1.75rem, 3.5vw, 3rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.2;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 </style>
