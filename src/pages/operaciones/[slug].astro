@@ -1,0 +1,466 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroPage from "../../components/HeroPage.astro";
+
+// 1. Data Definition (Simulated Data Source)
+// In a real scenario, this could be a separate JSON file or Astro content collection.
+const services = [
+    {
+        slug: "obras-civiles",
+        title: "Obras Civiles",
+        descriptionHero:
+            "Infraestructura robusta con los más altos estándares.",
+        descriptionPage: `
+            <p>En <strong>INACONS</strong>, la ejecución de obras civiles es uno de nuestros pilares fundamentales. Nos especializamos en la construcción de infraestructuras que combinan durabilidad, funcionalidad y estética, adaptándonos a los requerimientos específicos de cada cliente y terreno.</p>
+            <p>Nuestro equipo multidisciplinario gestiona cada etapa del proyecto, desde la planificación inicial y el movimiento de tierras hasta la cimentación y los acabados finales, garantizando el cumplimiento de los plazos y la calidad en cada detalle.</p>
+            <ul>
+                <li>Edificaciones residenciales y corporativas.</li>
+                <li>Cimentaciones profundas y estructuras complejas.</li>
+                <li>Habilitaciones urbanas.</li>
+            </ul>
+        `,
+        bannerImage: "/images/hero/hero_poster.webp", // Placeholder
+        portfolioFile: "/docs/portafolios/obras-civiles.pdf",
+        relatedProjects: [
+            {
+                title: "Complejo Residencial 'Los Álamos'",
+                slug: "complejo-residencial-alamos",
+            },
+            {
+                title: "Edificio Corporativo Inceptio",
+                slug: "edificio-inceptio",
+            },
+            {
+                title: "Habilitación Urbana 'Verde Horizonte'",
+                slug: "habilitacion-verde-horizonte",
+            },
+        ],
+    },
+    {
+        slug: "infraestructura",
+        title: "Infraestructura",
+        descriptionHero:
+            "Conectando regiones con ingeniería de gran envergadura.",
+        descriptionPage: `
+            <p>Desarrollamos proyectos de infraestructura vial y logística que impulsan el desarrollo económico y social. Nuestra experiencia abarca la construcción de carreteras, puentes y accesos en geografías desafiantes.</p>
+            <p>Utilizamos tecnología de punta y maquinaria especializada para asegurar la eficiencia y sostenibilidad de nuestras obras, cumpliendo con todas las normativas técnicas y ambientales vigentes.</p>
+        `,
+        bannerImage: "/images/hero/hero_poster.webp",
+        portfolioFile: "/docs/portafolios/infraestructura.pdf",
+        relatedProjects: [
+            {
+                title: "Carretera Interoceánica Tramo 4",
+                slug: "carretera-interoceanica-4",
+            },
+            { title: "Puente Vehicular Santa Rosa", slug: "puente-santa-rosa" },
+        ],
+    },
+    {
+        slug: "electromecanica",
+        title: "Electromecánica",
+        descriptionHero: "Soluciones integrales en energía y automatización.",
+        descriptionPage: `
+            <p>Ofrecemos servicios especializados en montaje electromecánico, instalación de subestaciones y sistemas de automatización industrial. Garantizamos la operatividad y seguridad de sus activos críticos.</p>
+        `,
+        bannerImage: "/images/hero/hero_poster.webp",
+        portfolioFile: "/docs/portafolios/electromecanica.pdf",
+        relatedProjects: [
+            {
+                title: "Subestación Eléctrica Moyobamba",
+                slug: "subestacion-moyobamba",
+            },
+            {
+                title: "Automatización Faja Transportadora",
+                slug: "automatizacion-faja",
+            },
+        ],
+    },
+    {
+        slug: "paisajismo",
+        title: "Paisajismo",
+        descriptionHero: "Integrando la naturaleza en cada proyecto.",
+        descriptionPage: `
+            <p>Transformamos espacios mediante el diseño y ejecución de proyectos paisajísticos que armonizan con el entorno. Desde parques públicos hasta áreas verdes corporativas.</p>
+        `,
+        bannerImage: "/images/hero/hero_poster.webp",
+        portfolioFile: "/docs/portafolios/paisajismo.pdf",
+        relatedProjects: [
+            { title: "Parque Lineal del Río", slug: "parque-lineal-rio" },
+        ],
+    },
+    {
+        slug: "mineria",
+        title: "Minería",
+        descriptionHero: "Servicios especializados para el sector extractivo.",
+        descriptionPage: `
+            <p>Proveemos soporte integral a la minería con la construcción de campamentos, plantas de tratamiento y obras civiles en alta montaña, siempre bajo estrictos protocolos de seguridad.</p>
+        `,
+        bannerImage: "/images/hero/hero_poster.webp",
+        portfolioFile: "/docs/portafolios/mineria.pdf",
+        relatedProjects: [
+            {
+                title: "Planta de Tratamiento Mina Justa",
+                slug: "planta-mina-justa",
+            },
+        ],
+    },
+    {
+        slug: "consultoria",
+        title: "Consultoría",
+        descriptionHero:
+            "Asesoría técnica experta para decisiones estratégicas.",
+        descriptionPage: `
+            <p>Brindamos servicios de consultoría en ingeniería, gestión de proyectos y supervisión de obras, asegurando la viabilidad técnica y económica de sus inversiones.</p>
+        `,
+        bannerImage: "/images/hero/hero_poster.webp",
+        portfolioFile: "/docs/portafolios/consultoria.pdf",
+        relatedProjects: [],
+    },
+];
+
+// 2. getStaticPaths Implementation
+export async function getStaticPaths() {
+    const servicesData = [
+        { slug: "obras-civiles" },
+        { slug: "infraestructura" },
+        { slug: "electromecanica" },
+        { slug: "paisajismo" },
+        { slug: "mineria" },
+        { slug: "consultoria" },
+    ];
+
+    return servicesData.map(({ slug }) => {
+        return {
+            params: { slug },
+        };
+    });
+}
+
+// 3. Get Current Service Data
+const { slug } = Astro.params;
+const currentService = services.find((s) => s.slug === slug);
+
+// Handle 404 (Optional safety check, though getStaticPaths usually handles valid ones)
+if (!currentService) {
+    return Astro.redirect("/404");
+}
+
+// 4. Get Other Services for Aside
+const otherServices = services.filter((s) => s.slug !== slug);
+
+// Icons
+const iconPdf = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`;
+const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+---
+
+<BaseLayout>
+    <!-- Hero Component -->
+    <HeroPage
+        variant="project"
+        title={currentService.title}
+        subtitle="SOLUCIONES ESPECIALIZADAS"
+        content={currentService.descriptionHero}
+        background={{
+            type: "image",
+            src: currentService.bannerImage,
+            alt: currentService.title,
+        }}
+        breadcrumbs={[
+            { label: "Inicio", url: "/" },
+            { label: "Operaciones", url: "/operaciones" },
+            { label: currentService.title },
+        ]}
+    />
+
+    <!-- Main Content Layout -->
+    <div class="service-container">
+        <div class="service-layout">
+            <!-- Left Column: Service Information -->
+            <main class="service-content">
+                <h1 class="page-title">{currentService.title}</h1>
+
+                <div
+                    class="description-block"
+                    set:html={currentService.descriptionPage}
+                />
+
+                {
+                    currentService.relatedProjects.length > 0 && (
+                        <div class="related-projects">
+                            <h2 class="related-title">Proyectos asociados</h2>
+                            <ul class="projects-list">
+                                {currentService.relatedProjects.map(
+                                    (project) => (
+                                        <li>
+                                            <a
+                                                href={`/proyectos#${project.slug}`}
+                                                class="project-link"
+                                            >
+                                                <span class="project-name">
+                                                    {project.title}
+                                                </span>
+                                                <span
+                                                    class="link-icon"
+                                                    set:html={iconArrowRight}
+                                                />
+                                            </a>
+                                        </li>
+                                    ),
+                                )}
+                            </ul>
+                        </div>
+                    )
+                }
+            </main>
+
+            <!-- Right Column: Aside & Navigation -->
+            <aside class="service-aside">
+                <!-- Card 1: Downloads -->
+                <div class="aside-card downloads-card">
+                    <h3 class="aside-title">Opciones de descarga</h3>
+                    <div class="download-links">
+                        <a
+                            href="/docs/brochure-general.pdf"
+                            target="_blank"
+                            class="download-btn"
+                        >
+                            <span class="btn-icon" set:html={iconPdf} />
+                            <span class="btn-text">Brochure General</span>
+                        </a>
+                        <a
+                            href={currentService.portfolioFile}
+                            target="_blank"
+                            class="download-btn secondary"
+                        >
+                            <span class="btn-icon" set:html={iconPdf} />
+                            <span class="btn-text">Portafolio del Servicio</span
+                            >
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Other Services -->
+                <div class="aside-card nav-card">
+                    <h3 class="aside-title">Otros servicios</h3>
+                    <nav class="services-nav">
+                        <ul>
+                            {
+                                otherServices.map((svc) => (
+                                    <li>
+                                        <a
+                                            href={`/operaciones/${svc.slug}`}
+                                            class="nav-link"
+                                        >
+                                            {svc.title}
+                                        </a>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    /* PAGE LAYOUT */
+    .service-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 5rem 1.5rem;
+        background-color: #fff;
+    }
+
+    .service-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    @media (min-width: 992px) {
+        .service-layout {
+            grid-template-columns: 7fr 3fr; /* 70% - 30% split */
+            gap: 5rem;
+        }
+    }
+
+    /* LEFT COLUMN: CONTENT */
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--color-brand-primary, #1a1a1a);
+        margin-bottom: 2rem;
+        line-height: 1.2;
+    }
+
+    .description-block {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--color-text-body, #4a4a4a);
+        margin-bottom: 3rem;
+    }
+
+    /* Use :global because HTML is inserted via set:html */
+    .description-block :global(p) {
+        margin-bottom: 1.5rem;
+    }
+
+    .description-block :global(ul) {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .description-block :global(li) {
+        margin-bottom: 0.5rem;
+        list-style-type: disc;
+    }
+
+    /* Related Projects */
+    .related-projects {
+        margin-top: 4rem;
+        border-top: 1px solid #eee;
+        padding-top: 2rem;
+    }
+
+    .related-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--color-brand-primary, #1a1a1a);
+    }
+
+    .projects-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .projects-list li {
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    .projects-list li:last-child {
+        border-bottom: none;
+    }
+
+    .project-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        text-decoration: none;
+        color: var(--color-text-body, #444);
+        transition: color 0.3s ease;
+    }
+
+    .project-link:hover {
+        color: var(--color-brand-accent, #dba618);
+    }
+
+    .project-name {
+        font-weight: 600;
+    }
+
+    .link-icon {
+        color: var(--color-brand-accent, #dba618);
+        transition: transform 0.3s ease;
+    }
+
+    .project-link:hover .link-icon {
+        transform: translateX(5px);
+    }
+
+    /* RIGHT COLUMN: ASIDE */
+    .service-aside {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .aside-card {
+        background-color: #f8f9fa;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 2rem;
+    }
+
+    .aside-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--color-brand-primary, #1a1a1a);
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--color-brand-accent, #dba618);
+        display: inline-block;
+    }
+
+    /* Downloads */
+    .download-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .download-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        background-color: var(--color-brand-primary, #1a1a1a);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+    .download-btn:hover {
+        background-color: #333;
+    }
+
+    .download-btn.secondary {
+        background-color: #fff;
+        color: var(--color-brand-primary, #1a1a1a);
+        border: 1px solid #ddd;
+    }
+
+    .download-btn.secondary:hover {
+        background-color: #f0f0f0;
+        border-color: #ccc;
+    }
+
+    .btn-icon {
+        color: var(--color-brand-accent, #dba618);
+    }
+
+    /* Services Nav */
+    .services-nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 0.75rem 0;
+        color: #666;
+        text-decoration: none;
+        border-bottom: 1px solid #e0e0e0;
+        transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+        color: var(--color-brand-accent, #dba618);
+        padding-left: 5px;
+        border-bottom-color: var(--color-brand-accent, #dba618);
+    }
+
+    .services-nav li:last-child .nav-link {
+        border-bottom: none;
+    }
+</style>

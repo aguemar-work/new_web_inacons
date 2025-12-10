@@ -1,6 +1,43 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroPage from "../components/HeroPage.astro";
+import DocumentCard from "../components/DocumentCard.astro";
+
+// Specific icon for certificates (Award/Badge style)
+const certIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>`;
+
+const certificates = [
+    {
+        title: "ISO 9001",
+        description:
+            "Sistema de Gestión de Calidad que garantiza la satisfacción del cliente y la mejora continua de nuestros procesos.",
+        fileUrl: "/certificados/iso-9001.pdf",
+    },
+    {
+        title: "ISO 14001",
+        description:
+            "Sistema de Gestión Ambiental que demuestra nuestro compromiso con la protección del medio ambiente y el desarrollo sostenible.",
+        fileUrl: "/certificados/iso-14001.pdf",
+    },
+    {
+        title: "ISO 45001",
+        description:
+            "Sistema de Gestión de Seguridad y Salud en el Trabajo que prioriza el bienestar de nuestros colaboradores.",
+        fileUrl: "/certificados/iso-45001.pdf",
+    },
+    {
+        title: "ISO 37001",
+        description:
+            "Sistema de Gestión Antisoborno que refuerza nuestra cultura de integridad, ética y transparencia empresarial.",
+        fileUrl: "/certificados/iso-37001.pdf",
+    },
+    {
+        title: "Certificado INCE-489",
+        description:
+            "Certificación que acredita nuestra capacidad técnica y experiencia en la ejecución de proyectos de construcción.",
+        fileUrl: "/certificados/ince-489.pdf",
+    },
+];
 ---
 
 <BaseLayout>
@@ -8,15 +45,94 @@ import HeroPage from "../components/HeroPage.astro";
         variant="page"
         title="Certificaciones que Respaldan Nuestra Excelencia Operativa"
         subtitle="GARANTÍA DE EXCELENCIA"
-        content={"Adherimos a las normas internacionales más estrictas. Nuestros certificados en gestión de calidad, medio ambiente, seguridad y anticorrupción son la prueba tangible de nuestro desempeño superior y compromiso inquebrantable."}
+        content="Adherimos a las normas internacionales más estrictas. Nuestros certificados en gestión de calidad, medio ambiente, seguridad y anticorrupción son la prueba tangible de nuestro desempeño superior y compromiso inquebrantable."
         background={{
             type: "image",
             src: "/images/image_nosotros.webp",
-            alt: "Nosotros",
+            alt: "Certificaciones Inacons",
         }}
         breadcrumbs={[
             { label: "Inicio", url: "/" },
             { label: "Certificación" },
         ]}
     />
+
+    <section class="section-certificates">
+        <div class="container">
+            <div class="certificates-header">
+                <h1 class="section-title">
+                    Certificaciones y Sistemas de Gestión
+                </h1>
+                <p class="section-desc">
+                    Estándares internacionales que avalan la calidad y
+                    responsabilidad de cada uno de nuestros procesos.
+                </p>
+            </div>
+
+            <div class="certificates-grid">
+                {
+                    certificates.map((cert) => (
+                        <DocumentCard
+                            title={cert.title}
+                            description={cert.description}
+                            fileUrl={cert.fileUrl}
+                            icon={certIcon}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    .section-certificates {
+        padding: 5rem 0;
+        background-color: #f8f9fa;
+        min-height: 50vh;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .certificates-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 4rem auto;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 800;
+        color: var(--color-brand-primary, #1a1a1a);
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .section-desc {
+        font-size: 1.125rem;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .certificates-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .certificates-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .certificates-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+</style>
