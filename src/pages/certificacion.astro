@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroPage from "../components/HeroPage.astro";
+---
+
+<BaseLayout>
+    <HeroPage
+        variant="page"
+        title="Certificaciones que Respaldan Nuestra Excelencia Operativa"
+        subtitle="GARANTÍA DE EXCELENCIA"
+        content={"Adherimos a las normas internacionales más estrictas. Nuestros certificados en gestión de calidad, medio ambiente, seguridad y anticorrupción son la prueba tangible de nuestro desempeño superior y compromiso inquebrantable."}
+        background={{
+            type: "image",
+            src: "/images/image_nosotros.webp",
+            alt: "Nosotros",
+        }}
+        breadcrumbs={[
+            { label: "Inicio", url: "/" },
+            { label: "Certificación" },
+        ]}
+    />
+</BaseLayout>

@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroPage from "../components/HeroPage.astro";
+import ContentSection from "../components/ContentSection.astro";
+import ValueCarousel from "../components/ValueCarousel.astro";
+import ClientsCarousel from "../components/ClientsCarousel.astro";
 ---
 
 <BaseLayout>
@@ -16,10 +19,91 @@ import HeroPage from "../components/HeroPage.astro";
             poster: "/images/hero/hero_poster.webp",
         }}
         indicators={[
-            { label: "Años de experiencia", value: "15 años" },
-            { label: "KM2 CONSTRUIDOS", value: "150" },
-            { label: "MM DE INVERSION", value: "100" },
-            { label: "PROFESIONALES", value: "100" },
+            { label: "experiencia", value: "15 años" },
+            { label: "construidos", value: "150KM2" },
+            { label: "inversion", value: "100MM" },
+            { label: "profesionales", value: "+100" },
         ]}
+    />
+
+    <!-- SECCIÓN 1: Bienvenida -->
+    <ContentSection
+        id="bienvenida"
+        subtitle="Bienvenidos a INACONS"
+        title="Ingeniería con Propósito, Construcción con Legado"
+        description="Con más de 15 años impulsando el desarrollo del Perú, hemos perfeccionado una metodología que une innovación, precisión técnica y un compromiso inquebrantable con cada obra. No solo construimos infraestructura: materializamos confianza. Ejecutamos proyectos de alta complejidad con excelencia, cumplimiento y una gestión que garantiza resultados."
+        cta={{ label: "Descubra nuestra historia", href: "/nosotros" }}
+        image={{
+            src: "/images/image_nosotros.webp",
+            alt: "Equipo INACONS en obra",
+        }}
+        imagePosition="right"
+        mobileImagePosition="top"
+    />
+
+    <!-- SECCIÓN 2: Experiencia Regional -->
+    <ContentSection
+        id="experiencia"
+        subtitle="Capacidad Nacional"
+        title="Presencia que Genera Resultados en Todo el Perú"
+        description="Operamos más de 30 frentes de trabajo simultáneos en costa, sierra y selva. Esta cobertura nos permite movilizar logística especializada y talento local donde sea necesario, asegurando continuidad operativa y éxito en cada proyecto, sin importar el desafío geográfico."
+        image={{
+            src: "/images/hero/hero_poster.webp",
+            alt: "Proyectos en todo el Perú",
+        }}
+        imagePosition="left"
+        mobileImagePosition="bottom"
+    />
+
+    <!-- SECCIÓN 3: Carrousel de Valor -->
+    <ValueCarousel
+        slides={[
+            {
+                title: "Servicios Integrales de Ingeniería y Construcción",
+                description:
+                    "Transformamos los desafíos técnicos y logísticos más exigentes en soluciones eficientes y viables. Nuestro portafolio abarca desde consultoría estratégica hasta ejecución llave en mano, mediante metodologías innovadoras que garantizan el éxito de cada proyecto.",
+                cta: {
+                    label: "Explore nuestros servicios",
+                    href: "/servicios",
+                },
+                image: {
+                    src: "/images/image_nosotros.webp",
+                    alt: "Servicios de ingeniería",
+                },
+            },
+            {
+                title: "Alianzas y Certificaciones de Clase Mundial",
+                description:
+                    "Trabajamos bajo estándares globales, respaldados por certificaciones internacionales y alianzas estratégicas con líderes del sector. Este ecosistema nos permite operar con los más altos niveles de calidad, seguridad e integridad.",
+                cta: {
+                    label: "Conozca nuestras certificaciones",
+                    href: "/certificacion",
+                },
+                image: {
+                    src: "/images/hero/hero_poster.webp",
+                    alt: "Certificaciones internacionales",
+                },
+            },
+            {
+                title: "Compromiso con un Futuro Sostenible",
+                description:
+                    "Integramos sostenibilidad y gestión social en el núcleo de nuestros proyectos. Impulsamos prácticas responsables que protegen el entorno, fortalecen a las comunidades y generan valor compartido en cada operación.",
+                cta: {
+                    label: "Vea nuestro compromiso",
+                    href: "/sostenibilidad",
+                },
+                image: {
+                    src: "/images/image_nosotros.webp",
+                    alt: "Sostenibilidad ambiental",
+                },
+            },
+        ]}
+    />
+
+    <!-- SECCIÓN 4: Clientes / Casos de Éxito -->
+    <ClientsCarousel
+        subtitle="Casos de Éxito"
+        title="Aliados Estratégicos que Construyen el Perú con Nosotros"
+        description="Colaboramos con organizaciones que comparten nuestra visión de excelencia. Nuestras alianzas están basadas en confianza, innovación aplicada y una gestión rigurosa que eleva los estándares de la industria en cada obra que ejecutamos."
     />
 </BaseLayout>

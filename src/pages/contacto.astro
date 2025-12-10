@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroPage from "../components/HeroPage.astro";
+---
+
+<BaseLayout>
+    <HeroPage
+        variant="page"
+        title=" ¿Listo para Construir con Confianza?"
+        subtitle="GARANTÍA DE EXCELENCIA INICIE SU PROYECTO"
+        content={"Estamos listos para escuchar su desafío y demostrar cómo nuestra experiencia en proyectos complejos puede agregar valor decisivo a su construcción. Contáctenos hoy mismo."}
+        background={{
+            type: "image",
+            src: "/images/image_nosotros.webp",
+            alt: "Nosotros",
+        }}
+        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Contacto" }]}
+    />
+</BaseLayout>
