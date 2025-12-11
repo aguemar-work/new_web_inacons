@@ -1,0 +1,209 @@
+---
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+interface Slide {
+    title: string;
+    description: string;
+    cta: {
+        label: string;
+        href: string;
+    };
+    image: {
+        src: string;
+        alt: string;
+    };
+}
+
+interface Props {
+    slides: Slide[];
+}
+
+const { slides } = Astro.props;
+---
+
+<section class="value-carousel">
+    <div class="container">
+        <div class="swiper value-swiper">
+            <div class="swiper-wrapper">
+                {
+                    slides.map((slide) => (
+                        <div class="swiper-slide">
+                            <div class="slide-grid">
+                                <div class="slide-image">
+                                    <img
+                                        src={slide.image.src}
+                                        alt={slide.image.alt}
+                                        loading="lazy"
+                                    />
+                                </div>
+                                <div class="slide-content">
+                                    <h3 class="slide-title">{slide.title}</h3>
+                                    <p class="slide-desc">
+                                        {slide.description}
+                                    </p>
+                                    <a href={slide.cta.href} class="slide-cta">
+                                        {slide.cta.label}
+                                        <span class="arrow">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Controls -->
+            <div class="swiper-controls">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import Swiper from "swiper";
+    import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+    document.addEventListener("astro:page-load", () => {
+        initSwiper();
+    });
+
+    // Fallback for non-ViewTransitions
+    initSwiper();
+
+    function initSwiper() {
+        const el = document.querySelector(".value-swiper");
+        if (!el) return;
+
+        new Swiper(el as HTMLElement, {
+            modules: [Navigation, Pagination, Autoplay],
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    }
+</script>
+
+<style>
+    .value-carousel {
+        padding: 5rem 0;
+        background-color: var(
+            --color-surface-soft,
+            #f8f9fa
+        ); /* Light background for contrast */
+        overflow: hidden;
+    }
+
+    .slide-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .slide-image {
+        width: 100%;
+        aspect-ratio: 16/9;
+    }
+    .slide-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .slide-content {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .slide-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--color-text);
+    }
+
+    .slide-desc {
+        color: var(--color-text-muted);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .slide-cta {
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        color: var(--color-text);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.2s;
+    }
+    .slide-cta:hover {
+        color: var(--color-brand-accent, #ffcc00);
+    }
+
+    /* Swiper Controls overrides */
+    .swiper-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        position: relative;
+        height: 40px;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        position: static;
+        margin: 0;
+        color: var(--color-text);
+        width: 40px;
+        height: 40px;
+    }
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+        font-size: 1.25rem;
+    }
+
+    .swiper-pagination {
+        position: static;
+        width: auto;
+    }
+
+    @media (min-width: 1024px) {
+        .slide-grid {
+            grid-template-columns: 1fr 1fr; /* Image wider than text */
+        }
+        .slide-image {
+            aspect-ratio: auto;
+            height: 100%;
+            min-height: 400px;
+        }
+        .slide-content {
+            padding: 2rem;
+        }
+    }
+</style>

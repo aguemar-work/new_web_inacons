@@ -8,12 +8,313 @@ import HeroPage from "../components/HeroPage.astro";
         variant="page"
         title="Lideramos con Ingeniería que Regenera y Optimiza"
         subtitle="NUESTRO COMPROMISO"
-        content={"En INACONS, la sostenibilidad no es un departamento; es el principio rector de nuestra ingeniería. Aplicamos innovación tecnológica de vanguardia en cada proyecto minero y de construcción para una misión dual: optimizar recursos al máximo y regenerar los ecosistemas que intervenimos. Este compromiso se materializa en soluciones personalizadas que no solo responden a los desafíos técnicos del presente, sino que construyen activamente un legado ambiental positivo para el futuro."}
+        content="En INACONS, la sostenibilidad no es un departamento; es el principio rector de nuestra ingeniería. Aplicamos innovación tecnológica de vanguardia en cada proyecto minero y de construcción para una misión dual: optimizar recursos al máximo y regenerar los ecosistemas que intervenimos."
         background={{
             type: "image",
             src: "/images/image_nosotros.webp",
-            alt: "Nosotros",
+            alt: "Sostenibilidad en Inacons",
         }}
-        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
+        breadcrumbs={[
+            { label: "Inicio", url: "/" },
+            { label: "Sostenibilidad" },
+        ]}
     />
+
+    <!-- SECCIÓN 1: Compromiso Social -->
+    <section class="section-social">
+        <div class="container split-layout">
+            <div class="split-image-wrapper">
+                <img
+                    src="/images/image_nosotros.webp"
+                    alt="Trabajo con la comunidad y responsabilidad social"
+                    loading="lazy"
+                    class="split-image"
+                />
+            </div>
+            <div class="split-content">
+                <h2 class="section-title">Nuestro Compromiso Social</h2>
+                <div class="content-text">
+                    <p>
+                        En Inacons apoyamos activamente a las comunidades. A
+                        través de nuestra colaboración con <strong
+                            >Aldeas Infantiles</strong
+                        >, contribuimos al bienestar de niños y familias en
+                        situación de vulnerabilidad, generando oportunidades
+                        para un futuro mejor.
+                    </p>
+                    <p>
+                        Nuestra labor va más allá de la construcción: trabajamos
+                        con ética y responsabilidad, alineados con los <strong
+                            >Objetivos de Desarrollo Sostenible (ODS)</strong
+                        >.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: Seguridad y Prevención -->
+    <section class="section-safety">
+        <div class="container split-layout split-layout--reverse">
+            <div class="split-image-wrapper">
+                <img
+                    src="/images/hero/hero_poster.webp"
+                    alt="Seguridad y prevención en obra"
+                    loading="lazy"
+                    class="split-image"
+                />
+            </div>
+            <div class="split-content">
+                <h2 class="section-title">Seguridad y Prevención</h2>
+                <div class="content-text">
+                    <p>
+                        En Inacons aplicamos una <strong
+                            >política cero accidentes</strong
+                        >, asegurando la seguridad y bienestar de cada
+                        colaborador. Para fortalecer esta cultura, desarrollamos
+                        iniciativas como:
+                    </p>
+                    <ul class="custom-list">
+                        <li>Premiar al trabajador del mes en seguridad.</li>
+                        <li>Promover el orden y limpieza en obra.</li>
+                        <li>Involucrar a todas las áreas en la prevención.</li>
+                    </ul>
+                    <p>
+                        Así garantizamos entornos de trabajo seguros y
+                        eficientes.
+                    </p>
+                </div>
+
+                <!-- Grid de Iconos -->
+                <div class="safety-grid">
+                    <div class="safety-item">
+                        <div class="icon-wrapper">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path
+                                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                ></path><path d="m9 12 2 2 4-4"></path></svg
+                            >
+                        </div>
+                        <h3 class="safety-label">Cero Accidentes</h3>
+                    </div>
+                    <div class="safety-item">
+                        <div class="icon-wrapper">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><path
+                                    d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                                ></path><circle cx="9" cy="7" r="4"
+                                ></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"
+                                ></path><path d="M16 3.13a4 4 0 0 1 0 7.75"
+                                ></path></svg
+                            >
+                        </div>
+                        <h3 class="safety-label">Cultura Preventiva</h3>
+                    </div>
+                    <div class="safety-item">
+                        <div class="icon-wrapper">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                ><circle cx="12" cy="8" r="7"></circle><polyline
+                                    points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"
+                                ></polyline></svg
+                            >
+                        </div>
+                        <h3 class="safety-label">Reconocimientos</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    /* VARIABLES */
+    :root {
+        --color-brand-accent: #dba618;
+        --color-text-body: #4a4a4a;
+        --color-heading: #1a1a1a;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    /* SECTIONS COMMON */
+    .section-social,
+    .section-safety {
+        padding: 5rem 0;
+        background-color: #fff;
+    }
+
+    .section-safety {
+        background-color: #f8f9fa; /* Subtle contrast */
+    }
+
+    .split-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    @media (min-width: 992px) {
+        .split-layout {
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+
+        /* Order swapping for reverse layout */
+        .split-layout--reverse .split-content {
+            order: 1;
+        }
+        .split-layout--reverse .split-image-wrapper {
+            order: 2;
+        }
+    }
+
+    /* IMAGES */
+    .split-image-wrapper {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        min-height: 300px; /* Mobile minimum */
+    }
+
+    @media (min-width: 992px) {
+        .split-image-wrapper {
+            min-height: 500px; /* Desktop height */
+        }
+    }
+
+    .split-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .split-image-wrapper:hover .split-image {
+        transform: scale(1.05);
+    }
+
+    /* CONTENT */
+    .section-title {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        color: var(--color-heading, #1a1a1a);
+        line-height: 1.2;
+    }
+
+    .content-text {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--color-text-body, #444);
+        margin-bottom: 2rem;
+    }
+
+    .content-text p {
+        margin-bottom: 1rem;
+    }
+
+    .content-text strong {
+        color: var(--color-heading, #1a1a1a);
+        font-weight: 700;
+    }
+
+    .custom-list {
+        list-style: none;
+        padding-left: 0;
+        margin: 1.5rem 0;
+    }
+
+    .custom-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .custom-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--color-brand-accent, #dba618);
+        font-weight: bold;
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+
+    /* SAFETY GRID */
+    .safety-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 3rem;
+    }
+
+    @media (min-width: 640px) {
+        .safety-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .safety-item {
+        background: #fff;
+        padding: 1.5rem 1rem;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid #eee;
+        transition:
+            transform 0.3s ease,
+            border-color 0.3s ease;
+    }
+
+    .safety-item:hover {
+        transform: translateY(-5px);
+        border-color: var(--color-brand-accent, #dba618);
+    }
+
+    .icon-wrapper {
+        color: var(--color-brand-accent, #dba618);
+        margin-bottom: 0.75rem;
+    }
+
+    .safety-label {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--color-heading, #1a1a1a);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+</style>

@@ -253,7 +253,7 @@ const TitleTag = "h1";
         text-align: center;
     }
     .hero__title--home {
-        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-size: clamp(1.75rem, 5vw, 3.5rem);
         font-weight: 800;
         line-height: 1.1;
         text-transform: uppercase;
@@ -264,7 +264,7 @@ const TitleTag = "h1";
         display: block;
     }
     .hero__subtitle {
-        font-size: clamp(1rem, 2vw, 1.25rem);
+        font-size: clamp(0.875rem, 2vw, 1.25rem);
         max-width: 60ch;
         opacity: 0.9;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -288,14 +288,15 @@ const TitleTag = "h1";
     .indicator {
         display: flex;
         flex-direction: column;
+        gap: 0.5rem;
     }
     .indicator__value {
-        font-size: 2rem;
+        font-size: clamp(1.5rem, 2vw, 2rem);
         font-weight: 700;
         color: var(--color-brand-accent, #ffcc00);
     }
     .indicator__label {
-        font-size: 0.875rem;
+        font-size: clamp(0.75rem, 2vw, 1rem);
         text-transform: uppercase;
         opacity: 0.9;
         font-weight: 500;
@@ -338,7 +339,7 @@ const TitleTag = "h1";
         margin-bottom: 0.5rem;
     }
     .hero__title--page {
-        font-size: clamp(2rem, 3.5vw, 3.5rem);
+        font-size: clamp(2rem, 3.5vw, 2.5rem);
         font-weight: 700;
         line-height: 1.1;
         text-transform: uppercase;

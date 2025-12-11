@@ -1,14 +1,65 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroPage from "../components/HeroPage.astro";
+import ClientsCarousel from "../components/ClientsCarousel.astro";
+
+const values = [
+    {
+        title: "CONFIANZA",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    },
+    {
+        title: "INNOVACIÓN",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/></svg>`,
+    },
+    {
+        title: "TRASCENDER",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
+    },
+    {
+        title: "LEALTAD",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    },
+    {
+        title: "IDENTIFICACIÓN",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+    },
+];
+
+const differentiators = [
+    {
+        title: "Experiencia",
+        description:
+            "Más de 15 años de trayectoria nos respaldan como líderes en el sector de la construcción, desarrollando proyectos innovadores y sostenibles.",
+        image: "/images/image_nosotros.webp",
+    },
+    {
+        title: "Innovación y Sostenibilidad",
+        description:
+            "Implementamos las últimas tecnologías y prácticas sostenibles para crear espacios que respeten el medio ambiente y mejoren la calidad de vida.",
+        image: "/images/hero/hero_poster.webp",
+    },
+    {
+        title: "Cliente",
+        description:
+            "Nuestro compromiso es superar las expectativas de cada cliente, brindando soluciones personalizadas y un servicio de excelencia en cada proyecto.",
+        image: "/images/image_nosotros.webp",
+    },
+    {
+        title: "Equipo Humano",
+        description:
+            "Contamos con un equipo multicultural que se caracteriza por adaptarse a cualquier contexto y con la experiencia para enfrentar todo tipo de retos.",
+        image: "/images/hero/hero_poster.webp",
+    },
+];
 ---
 
 <BaseLayout>
     <HeroPage
         variant="page"
-        title="NUESTRA ESENCIA"
+        title="Comprometidos con la Excelencia en Construcción"
         subtitle="Ingeniería con Propósito, Construcción con Confianza"
-        content={"Somos INACONS, un referente en ingeniería y construcción en Perú con más de una década y media de experiencia. Nuestra razón de ser es clara: desarrollar proyectos de alta complejidad que integren excelencia técnica, seguridad inquebrantable y responsabilidad ambiental."}
+        content="Somos INACONS, un referente en ingeniería y construcción en Perú con más de una década y media de experiencia. Nuestra razón de ser es clara: desarrollar proyectos de alta complejidad que integren excelencia técnica, seguridad inquebrantable y responsabilidad ambiental."
         background={{
             type: "image",
             src: "/images/image_nosotros.webp",
@@ -16,4 +67,336 @@ import HeroPage from "../components/HeroPage.astro";
         }}
         breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
     />
+
+    <!-- SECCIÓN 1: Misión, Visión y Valores -->
+    <section class="section-identity">
+        <div class="container identity-grid">
+            <div class="identity-content">
+                <span class="eyebrow">Ingeniería que Construye</span>
+
+                <div class="mission-vision-wrapper">
+                    <div class="text-block">
+                        <h2 class="block-title">Misión</h2>
+                        <p class="block-text">
+                            Fortalecernos responsablemente generando valor de
+                            nuestros servicios de ingeniería y construcción,
+                            cumpliendo nuestro propósito a todos nuestros
+                            clientes y socios estratégicos.
+                        </p>
+                    </div>
+
+                    <div class="text-block">
+                        <h2 class="block-title">Visión</h2>
+                        <p class="block-text">
+                            Ser reconocidos como la empresa de ingeniería y
+                            construcción sólida capaz de diversificar nuestros
+                            servicios en la región Latinoamérica, comprometido
+                            con el desarrollo sostenible de todos nuestros
+                            clientes y socios estratégicos.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="values-wrapper">
+                    <h3 class="values-title">Valores</h3>
+                    <div class="values-grid">
+                        {
+                            values.map((value) => (
+                                <div class="value-card">
+                                    <div
+                                        class="value-icon"
+                                        set:html={value.icon}
+                                    />
+                                    <span class="value-name">
+                                        {value.title}
+                                    </span>
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="identity-image">
+                <img
+                    src="/images/hero/hero_poster.webp"
+                    alt="Equipo INACONS trabajando en obra"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                />
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: Diferenciadores -->
+    <section class="section-differentiators">
+        <div class="container">
+            <h2 class="section-title">Lo que nos diferencia</h2>
+
+            <div class="diff-grid">
+                {
+                    differentiators.map((item) => (
+                        <article class="diff-card">
+                            <img
+                                src={item.image}
+                                alt={item.title}
+                                class="diff-bg"
+                                loading="lazy"
+                            />
+                            <div class="diff-overlay" />
+                            <div class="diff-content">
+                                <h3 class="diff-title">{item.title}</h3>
+                                <p class="diff-desc">{item.description}</p>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: Clientes -->
+    <ClientsCarousel
+        title="Nuestros Clientes"
+        description="Confían en nosotros las principales empresas del país."
+    />
 </BaseLayout>
+
+<style>
+    /* VARIABLES LOCAS (Si no están globales) */
+    /* GENERAL */
+    .section-identity {
+        padding: 5rem 0;
+        background-color: #fff;
+    }
+
+    .section-differentiators {
+        padding: 5rem 0;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .eyebrow {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--color-accent, #dba618);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 1rem;
+    }
+
+    /* SECTION 1: IDENTITY */
+    .identity-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    @media (min-width: 1024px) {
+        .identity-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+    }
+
+    .block-title {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 0.75rem;
+        color: var(--color-primary, #111);
+    }
+
+    .block-text {
+        font-size: 1.125rem;
+        line-height: 1.6;
+        color: var(--color-text-muted, #4a4a4a);
+        margin-bottom: 2rem;
+    }
+
+    .values-wrapper {
+        margin-top: 3rem;
+    }
+
+    .values-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        color: var(--color-primary, #111);
+    }
+
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 1rem;
+    }
+
+    .value-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        text-align: center;
+        transition: all 0.3s ease;
+        background: #fff;
+    }
+
+    .value-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        border-color: var(--color-accent, #dba618);
+    }
+
+    .value-icon {
+        color: var(--color-accent, #dba618);
+        margin-bottom: 0.75rem;
+    }
+
+    .value-icon :global(svg) {
+        width: 32px;
+        height: 32px;
+    }
+
+    .value-name {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .identity-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* SECTION 2: DIFFERENTIATORS */
+    .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--color-primary, #111);
+    }
+
+    .diff-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+        .diff-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .diff-card {
+        position: relative;
+        height: 350px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    /* Overlay base */
+    .diff-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.6) 50%,
+            rgba(0, 0, 0, 0.2) 100%
+        );
+        transition: opacity 0.3s ease;
+    }
+
+    .diff-card:hover .diff-overlay {
+        opacity: 0.9;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.6) 60%,
+            rgba(0, 0, 0, 0.3) 100%
+        );
+    }
+
+    .diff-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .diff-card:hover .diff-bg {
+        transform: scale(1.05); /* Micro-interaction */
+    }
+
+    .diff-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 2rem;
+        z-index: 10;
+        color: white;
+    }
+
+    .diff-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .diff-desc {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* RESPONSIVE TWEAKS */
+    @media (max-width: 768px) {
+        .block-title {
+            font-size: 1.75rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .diff-card {
+            height: 300px;
+        }
+
+        .values-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .value-card {
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 1rem;
+            text-align: left;
+            padding: 1rem;
+        }
+
+        .value-icon {
+            margin-bottom: 0;
+        }
+    }
+</style>

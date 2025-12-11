@@ -1,19 +1,304 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
 import HeroPage from "../../components/HeroPage.astro";
+
+// Data Source: Projects
+const projects = [
+    {
+        id: "p1",
+        title: "Complejo Residencial 'Los Álamos'",
+        category: "Obras Civiles",
+        image: "/images/image_nosotros.webp",
+        duration: "12 Meses",
+        amount: "$ 5,000,000",
+        place: "Lima, Perú",
+        slug: "complejo-residencial-alamos",
+    },
+    {
+        id: "p2",
+        title: "Carretera Interoceánica Tramo 4",
+        category: "Infraestructura",
+        image: "/images/hero/hero_poster.webp",
+        duration: "24 Meses",
+        amount: "$ 45,000,000",
+        place: "Cusco, Perú",
+        slug: "carretera-interoceanica-4",
+    },
+    {
+        id: "p3",
+        title: "Subestación Eléctrica Moyobamba",
+        category: "Electromecánica",
+        image: "/images/image_nosotros.webp",
+        duration: "8 Meses",
+        amount: "$ 2,500,000",
+        place: "San Martín, Perú",
+        slug: "subestacion-moyobamba",
+    },
+    {
+        id: "p4",
+        title: "Parque Lineal del Río",
+        category: "Paisajismo",
+        image: "/images/hero/hero_poster.webp",
+        duration: "6 Meses",
+        amount: "$ 1,200,000",
+        place: "Arequipa, Perú",
+        slug: "parque-lineal-rio",
+    },
+    {
+        id: "p5",
+        title: "Planta de Tratamiento Mina Justa",
+        category: "Minería",
+        image: "/images/image_nosotros.webp",
+        duration: "18 Meses",
+        amount: "$ 12,000,000",
+        place: "Ica, Perú",
+        slug: "planta-mina-justa",
+    },
+    {
+        id: "p6",
+        title: "Edificio Corporativo Inceptio",
+        category: "Obras Civiles",
+        image: "/images/hero/hero_poster.webp",
+        duration: "14 Meses",
+        amount: "$ 8,500,000",
+        place: "Lima, Perú",
+        slug: "edificio-inceptio",
+    },
+    {
+        id: "p7",
+        title: "Puente Vehicular Santa Rosa",
+        category: "Infraestructura",
+        image: "/images/image_nosotros.webp",
+        duration: "10 Meses",
+        amount: "$ 6,000,000",
+        place: "Piura, Perú",
+        slug: "puente-santa-rosa",
+    },
+    {
+        id: "p8",
+        title: "Automatización Faja Transportadora",
+        category: "Electromecánica",
+        image: "/images/hero/hero_poster.webp",
+        duration: "5 Meses",
+        amount: "$ 1,800,000",
+        place: "Moquegua, Perú",
+        slug: "automatizacion-faja",
+    },
+    {
+        id: "p9",
+        title: "Habilitación Urbana 'Verde Horizonte'",
+        category: "Obras Civiles",
+        image: "/images/image_nosotros.webp",
+        duration: "16 Meses",
+        amount: "$ 7,200,000",
+        place: "Trujillo, Perú",
+        slug: "habilitacion-verde-horizonte",
+    },
+];
+
+// Extract unique categories for filter
+const categories = ["Todos", ...new Set(projects.map((p) => p.category))];
 ---
 
 <BaseLayout>
     <HeroPage
         variant="page"
-        title=" Ingeniería que Supera el Terreno"
-        subtitle="NUESTRA TRAYECTORIA"
-        content={"Desarrollamos proyectos de construcción y minería en las geografías más exigentes del Perú, desde la costa árida hasta las alturas de la sierra. Adaptamos soluciones ingenieriles robustas a cada condición climática y logística. Un portafolio de más de 150 proyectos exitosos avala nuestra capacidad comprobada para superar cualquier reto, siempre bajo el estándar inquebrantable de INACONS: calidad y seguridad supremas en cada metro cuadrado."}
+        title="Experiencia construida en cada obra"
+        subtitle="NUESTROS PROYECTOS"
+        content="Desarrollamos proyectos de construcción y minería en las geografías más exigentes del Perú. Un portafolio de más de 150 proyectos exitosos avala nuestra capacidad comprobada para superar cualquier reto, siempre bajo el estándar inquebrantable de INACONS."
         background={{
             type: "image",
             src: "/images/image_nosotros.webp",
-            alt: "Nosotros",
+            alt: "Nuestros Proyectos",
         }}
-        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
+        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Proyectos" }]}
     />
+
+    <section class="projects-page">
+        <!-- Filters -->
+        <div class="container container--filter">
+            <div class="filter-scroll-wrapper">
+                <div class="filter-group" id="project-filters">
+                    {
+                        categories.map((cat, index) => (
+                            <button
+                                class={`filter-btn ${index === 0 ? "active" : ""}`}
+                                data-filter={cat === "Todos" ? "all" : cat}
+                            >
+                                {cat}
+                            </button>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="container container--grid">
+            <div class="projects-grid" id="projects-grid">
+                {
+                    projects.map((project) => (
+                        <ProjectCard
+                            title={project.title}
+                            category={project.category}
+                            image={project.image}
+                            duration={project.duration}
+                            amount={project.amount}
+                            location={project.place}
+                            slug={project.slug}
+                        />
+                    ))
+                }
+            </div>
+
+            <div id="no-results" class="no-results hidden">
+                <p>No se encontraron proyectos para esta categoría.</p>
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<script>
+    // Client-side filtering logic
+    document.addEventListener("DOMContentLoaded", () => {
+        const filters = document.querySelectorAll(".filter-btn");
+        const projects = document.querySelectorAll(".project-card");
+        const noResults = document.getElementById("no-results");
+
+        filters.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                // Remove active class from all
+                filters.forEach((b) => b.classList.remove("active"));
+                // Add active to current
+                btn.classList.add("active");
+
+                const filterValue = btn.getAttribute("data-filter");
+
+                let visibleCount = 0;
+
+                projects.forEach((project) => {
+                    const projectCategory =
+                        project.getAttribute("data-category");
+
+                    if (
+                        filterValue === "all" ||
+                        projectCategory === filterValue
+                    ) {
+                        (project as HTMLElement).style.display = "flex";
+                        project.classList.remove("hidden-card");
+                        visibleCount++;
+                    } else {
+                        (project as HTMLElement).style.display = "none";
+                        project.classList.add("hidden-card");
+                    }
+                });
+
+                if (visibleCount === 0 && noResults) {
+                    noResults.classList.remove("hidden");
+                } else if (noResults) {
+                    noResults.classList.add("hidden");
+                }
+            });
+        });
+    });
+</script>
+
+<style>
+    /* Page Layout & Spacing */
+    .projects-page {
+        padding: 4rem 0 6rem 0;
+        background-color: #f8f9fa;
+        min-height: 50vh;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    /* Filters */
+    .container--filter {
+        margin-bottom: 3rem;
+        position: static; /* Fixed: standard static positioning */
+        z-index: 10;
+    }
+
+    /* Wrapper for centering */
+    .filter-scroll-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        /* Removed overflow-x and padding-bottom specific to horizontal scroll */
+    }
+
+    .filter-group {
+        display: flex;
+        flex-wrap: wrap; /* Key change: Allow wrapping */
+        justify-content: center;
+        background-color: #fff;
+        padding: 1rem;
+        border-radius: 16px; /* Reduced from 50px for block appearance */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        gap: 0.75rem;
+        max-width: 100%;
+    }
+
+    .filter-btn {
+        background: transparent;
+        border: none;
+        padding: 0.6rem 1.25rem;
+        border-radius: 40px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: capitalize;
+        flex: 0 0 auto; /* Allow buttons to maintain size */
+    }
+
+    .filter-btn:hover {
+        color: #1a1a1a;
+        background-color: #f0f0f0;
+    }
+
+    .filter-btn.active {
+        background-color: var(--color-brand-primary, #1a1a1a);
+        color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Grid */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .projects-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 3rem;
+        font-size: 1.25rem;
+        color: #666;
+        background: #fff;
+        border-radius: 8px;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>

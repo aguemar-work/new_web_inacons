@@ -1,19 +1,119 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroPage from "../components/HeroPage.astro";
+import DocumentCard from "../components/DocumentCard.astro";
+
+const documents = [
+    {
+        title: "Política de Alcohol y Drogas",
+        description:
+            "Normativa sobre prevención y control del consumo de sustancias en el trabajo.",
+        fileUrl: "/documents/politica-alcohol-drogas.pdf",
+    },
+    {
+        title: "Política de Negativa al Trabajo Inseguro",
+        description:
+            "Derecho de los trabajadores a rechazar actividades que pongan en riesgo su seguridad.",
+        fileUrl: "/documents/politica-trabajo-inseguro.pdf",
+    },
+    {
+        title: "Política SIG",
+        description:
+            "Sistema Integrado de Gestión de Calidad, Medio Ambiente y Seguridad.",
+        fileUrl: "/documents/politica-sig.pdf",
+    },
+];
 ---
 
 <BaseLayout>
     <HeroPage
         variant="page"
-        title=" Documentos que Rigen Nuestras Operaciones"
+        title="Documentos que Rigen Nuestras Operaciones"
         subtitle="TRANSPARENCIA Y COMPROMISO"
-        content={"Como parte de nuestro compromiso con la integridad y las mejores prácticas, ponemos a su disposición nuestro conjunto de documentos corporativos. Aquí encontrará las políticas, certificaciones y protocolos que estructuran nuestro trabajo, asegurando que cada decisión y acción en proyectos de ingeniería y construcción se rija por los principios de seguridad, ética y excelencia que nos definen."}
+        content="Como parte de nuestro compromiso con la integridad y las mejores prácticas, ponemos a su disposición nuestro conjunto de documentos corporativos. Aquí encontrará las políticas, certificaciones y protocolos que estructuran nuestro trabajo."
         background={{
             type: "image",
             src: "/images/image_nosotros.webp",
             alt: "Nosotros",
         }}
-        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
+        breadcrumbs={[
+            { label: "Inicio", url: "/" },
+            { label: "Documentación" },
+        ]}
     />
+
+    <section class="section-documents">
+        <div class="container">
+            <div class="documents-header">
+                <h1 class="section-title">Nuestras Políticas</h1>
+                <p class="section-desc">
+                    Acceda a nuestra documentación oficial y conozca los
+                    lineamientos que nos guían.
+                </p>
+            </div>
+
+            <div class="documents-grid">
+                {
+                    documents.map((doc) => (
+                        <DocumentCard
+                            title={doc.title}
+                            description={doc.description}
+                            fileUrl={doc.fileUrl}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    .section-documents {
+        padding: 5rem 0;
+        background-color: #f8f9fa;
+        min-height: 50vh;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .documents-header {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 4rem auto;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--color-brand-primary, #1a1a1a);
+        margin-bottom: 1rem;
+    }
+
+    .section-desc {
+        font-size: 1.125rem;
+        color: #666;
+        line-height: 1.6;
+    }
+
+    .documents-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .documents-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .documents-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+</style>

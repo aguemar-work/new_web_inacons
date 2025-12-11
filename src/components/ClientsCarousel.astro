@@ -1,0 +1,224 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+
+interface Props {
+    subtitle?: string;
+    title: string;
+    description: string;
+}
+
+const { subtitle, title, description } = Astro.props;
+
+// Dynamic Image Loading
+// Using 'clientes' as verified in the file system
+const clientImagesDir = path.join(
+    process.cwd(),
+    "public",
+    "images",
+    "clientes",
+);
+let clientLogos: string[] = [];
+
+try {
+    if (fs.existsSync(clientImagesDir)) {
+        clientLogos = fs
+            .readdirSync(clientImagesDir)
+            .filter((file) => file.toLowerCase().endsWith(".png"))
+            .map((file) => `/images/clientes/${file}`);
+    } else {
+        console.warn(`Directory not found: ${clientImagesDir}`);
+    }
+} catch (error) {
+    console.error("Error reading client images:", error);
+}
+
+// Duplicate logos to ensure seamless looping
+// 13 logos * 2 = 26. Each ~200px (150px + gap). Total ~5200px.
+// This is sufficient for almost all screens.
+const displayLogos = [...clientLogos, ...clientLogos];
+---
+
+<section class="clients-carousel-section">
+    <div class="container container--header">
+        <div class="header">
+            {subtitle && <span class="subtitle">{subtitle}</span>}
+            <h2 class="title">{title}</h2>
+            <p class="description">{description}</p>
+        </div>
+    </div>
+
+    <div class="carousel-container" aria-label="Galería de clientes">
+        <div class="carousel-track">
+            {
+                displayLogos.map((src, index) => {
+                    // Extract simple name for Alt text (e.g. "/images/clientes/logo-acme.png" -> "logo acme")
+                    const filename =
+                        src
+                            .split("/")
+                            .pop()
+                            ?.replace(".png", "")
+                            .replace(/[-_]/g, " ") || "Cliente";
+                    return (
+                        <div class="logo-item">
+                            <img
+                                src={src}
+                                alt={`Logo de ${filename}`}
+                                loading={index > 10 ? "lazy" : "eager"}
+                                width="150"
+                                height="80"
+                            />
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .clients-carousel-section {
+        padding: 6rem 0;
+        background-color: #fff;
+        overflow: hidden; /* Hide overflow from carousel */
+    }
+
+    /* Header Styling (Consistent with other sections) */
+    .container--header {
+        margin-bottom: 4rem;
+        padding-left: var(--container-padding, 1rem);
+        padding-right: var(--container-padding, 1rem);
+    }
+
+    .header {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .subtitle {
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--color-brand-accent, #ffcc00);
+        letter-spacing: 0.05em;
+    }
+
+    .title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        line-height: 1.1;
+        color: var(--color-text, #1a1a1a);
+    }
+
+    .description {
+        font-size: 1.125rem;
+        color: var(--color-text-muted, #4a4a4a);
+        line-height: 1.6;
+    }
+
+    /* Carousel Logic */
+    .carousel-container {
+        width: 100%;
+        position: relative;
+        /* optional fade masks */
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 10%,
+            black 90%,
+            transparent
+        );
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 10%,
+            black 90%,
+            transparent
+        );
+    }
+
+    .carousel-track {
+        display: flex;
+        align-items: center;
+        gap: 4rem; /* Uniform spacing */
+        width: max-content;
+        animation: scroll 40s linear infinite;
+        will-change: transform;
+        padding: 1rem 0; /* Space for shadows */
+    }
+
+    /* Hover Pause */
+    .carousel-track:hover {
+        animation-play-state: paused;
+    }
+
+    .logo-item {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Fixed height wrapper for alignment */
+        height: 100px;
+        width: 160px; /* Base width constraint */
+        transition: transform 0.3s ease;
+    }
+
+    .logo-item img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        filter: grayscale(100%);
+        opacity: 0.7;
+        transition: all 0.3s ease;
+        /* SEO best practice */
+        display: block;
+    }
+
+    /* Hover Effects on Logo */
+    .logo-item:hover img {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.05); /* Micro-interaction: Scale */
+    }
+
+    /* Animation Keyframes */
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            /* Move exactly half the width (since we have 2 sets of logos) */
+            transform: translateX(-50%);
+        }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .carousel-track {
+            gap: 2rem;
+            animation-duration: 40s; /* Adjusted speed for mobile to avoid being too fast */
+        }
+
+        .logo-item {
+            width: 120px;
+            height: 80px;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .carousel-track {
+            animation-duration: 55s; /* Slower than desktop */
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .carousel-track {
+            animation-duration: 45s; /* Standard desktop speed */
+        }
+    }
+</style>

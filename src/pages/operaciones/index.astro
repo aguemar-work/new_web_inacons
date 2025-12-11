@@ -1,6 +1,117 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import HeroPage from "../../components/HeroPage.astro";
+
+const services = [
+    {
+        title: "Obras Civiles",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4 8 4v14"/><path d="M8 21v-9a4 4 0 0 1 4-4 4 4 0 0 1 4 4v9"/></svg>`,
+        items: [
+            "Construcción de edificaciones residenciales y comerciales",
+            "Estructuras de concreto armado y acero",
+            "Rehabilitación y remodelación de infraestructuras",
+        ],
+        image: "/images/image_nosotros.webp",
+        link: "/operaciones/obras-civiles",
+    },
+    {
+        title: "Infraestructura",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-4l-2 6H8l-2-6H4z"/></svg>`,
+        items: [
+            "Construcción de carreteras y puentes",
+            "Sistemas de drenaje y alcantarillado",
+            "Obras portuarias y aeroportuarias",
+        ],
+        image: "/images/hero/hero_poster.webp",
+        link: "/operaciones/infraestructura",
+    },
+    {
+        title: "Electromecánica",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+        items: [
+            "Instalaciones eléctricas industriales y comerciales",
+            "Sistemas de automatización y control",
+            "Mantenimiento de equipos electromecánicos",
+        ],
+        image: "/images/image_nosotros.webp",
+        link: "/operaciones/electromecanica",
+    },
+    {
+        title: "Paisajismo",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-9"/><path d="M9 13c-3.87-2.13-3.05-7.46 0-8.8 1.83-.8 4.17.8 4.17.8s2.34-1.6 4.17-.8c3.05 1.34 3.87 6.67 0 8.8"/></svg>`,
+        items: [
+            "Diseño y construcción de áreas verdes",
+            "Sistemas de riego automatizado",
+            "Mantenimiento de espacios paisajísticos",
+        ],
+        image: "/images/hero/hero_poster.webp",
+        link: "/operaciones/paisajismo",
+    },
+    {
+        title: "Minería",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>`,
+        items: [
+            "Construcción de infraestructura minera",
+            "Instalaciones de procesamiento de minerales",
+            "Sistemas de transporte y almacenamiento",
+        ],
+        image: "/images/image_nosotros.webp",
+        link: "/operaciones/mineria",
+    },
+    {
+        title: "Consultoría",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+        items: [
+            "Estudios de factibilidad y viabilidad",
+            "Supervisión y control de calidad",
+            "Gestión de proyectos y planificación",
+        ],
+        image: "/images/hero/hero_poster.webp",
+        link: "/operaciones/consultoria",
+    },
+];
+
+const methodology = [
+    {
+        number: "01",
+        title: "Descubriendo e Investigando",
+        description:
+            "Analizamos a fondo las necesidades del proyecto, realizamos estudios de factibilidad y evaluamos todos los aspectos técnicos y normativos para garantizar una base sólida.",
+    },
+    {
+        number: "02",
+        title: "Planificación y Diseño",
+        description:
+            "Desarrollamos planos detallados, cronogramas de trabajo y especificaciones técnicas, asegurando que cada elemento esté perfectamente coordinado antes de la ejecución.",
+    },
+    {
+        number: "03",
+        title: "Ejecución y Construcción",
+        description:
+            "Implementamos el proyecto con equipos especializados, supervisión constante y control de calidad en cada etapa, cumpliendo con los más altos estándares de seguridad.",
+    },
+    {
+        number: "04",
+        title: "Entrega y Seguimiento",
+        description:
+            "Realizamos las pruebas finales, entregamos la obra completamente funcional y brindamos soporte post-entrega para garantizar la satisfacción total del cliente.",
+    },
+];
+
+const technology = [
+    {
+        title: "Tecnología Aplicada a Supervisión y Control",
+        description:
+            "Supervisión Inteligente – Control de Asistencia – Documentos Digitales – Drones – Lidar",
+        image: "/images/image_nosotros.webp",
+    },
+    {
+        title: "Tecnología BIM",
+        description:
+            "Impulsamos la gestión integral de proyectos con tecnología BIM, mejorando eficiencia en cada etapa del proceso.",
+        image: "/images/hero/hero_poster.webp",
+    },
+];
 ---
 
 <BaseLayout>
@@ -8,12 +119,397 @@ import HeroPage from "../../components/HeroPage.astro";
         variant="page"
         title="Valor Agregado en Cada Fase del Proyecto"
         subtitle="QUÉ HACEMOS"
-        content={"En INACONS, transformamos conceptos en realidad con calidad excepcional, seguridad y eficiencia probada. Guiamos cada proyecto desde la asesoría técnica inicial hasta la implementación final de soluciones complejas, asegurando que cada etapa no solo cumpla con los planos, sino que construya valor tangible y consolide la confianza con nuestros clientes."}
+        content="En INACONS, transformamos conceptos en realidad con calidad excepcional, seguridad y eficiencia probada. Guiamos cada proyecto desde la asesoría técnica inicial hasta la implementación final de soluciones complejas, asegurando que cada etapa no solo cumpla con los planos, sino que construya valor tangible y consolide la confianza con nuestros clientes."
         background={{
             type: "image",
             src: "/images/image_nosotros.webp",
-            alt: "Nosotros",
+            alt: "Operaciones",
         }}
-        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Nosotros" }]}
+        breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Operaciones" }]}
     />
+
+    <!-- SECCIÓN 1: Servicios -->
+    <section class="section-services">
+        <div class="container">
+            <h2 class="section-title">
+                Servicios de Ingeniería y Construcción
+            </h2>
+            <div class="services-grid">
+                {
+                    services.map((service) => (
+                        <article class="service-card">
+                            <img
+                                src={service.image}
+                                alt={service.title}
+                                class="service-bg"
+                                loading="lazy"
+                            />
+                            <div class="service-overlay" />
+                            <div class="service-content">
+                                <div
+                                    class="service-icon"
+                                    set:html={service.icon}
+                                />
+                                <h3 class="service-title">{service.title}</h3>
+                                <ul class="service-list">
+                                    {service.items.map((item) => (
+                                        <li>{item}</li>
+                                    ))}
+                                </ul>
+                                <a href={service.link} class="service-cta">
+                                    Ver más <span class="arrow">→</span>
+                                </a>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: Metodología -->
+    <section class="section-methodology">
+        <div class="container">
+            <h2 class="section-title">Nuestra Metodología de Trabajo</h2>
+            <div class="methodology-grid">
+                {
+                    methodology.map((phase) => (
+                        <article class="method-card">
+                            <span class="method-number">{phase.number}</span>
+                            <h3 class="method-title">{phase.title}</h3>
+                            <p class="method-desc">{phase.description}</p>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: Tecnología -->
+    <section class="section-technology">
+        <div class="container">
+            <h2 class="section-title">
+                Tecnología Aplicada a Nuestros Servicios
+            </h2>
+            <div class="technology-grid">
+                {
+                    technology.map((tech) => (
+                        <article class="tech-card">
+                            <div class="tech-image-wrapper">
+                                <img
+                                    src={tech.image}
+                                    alt={tech.title}
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="tech-content">
+                                <h3 class="tech-title">{tech.title}</h3>
+                                <p class="tech-desc">{tech.description}</p>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
 </BaseLayout>
+
+<style>
+    /* VARIABLES */
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--color-primary);
+    }
+
+    /* --- SERVICES SECTION --- */
+    .section-services {
+        padding: 5rem 0;
+        background-color: #f8f9fa;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Desktop: 3 cols, Tablet: 2 cols */
+    @media (min-width: 768px) {
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (min-width: 1024px) {
+        .services-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .service-card {
+        position: relative;
+        height: 420px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: var(--color-primary);
+    }
+
+    .service-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        z-index: 1;
+    }
+
+    .service-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.6) 50%,
+            rgba(0, 0, 0, 0.2) 100%
+        );
+        z-index: 2;
+        transition: opacity 0.3s ease;
+    }
+
+    .service-content {
+        position: relative;
+        z-index: 3;
+        padding: 2rem;
+        color: var(--color-gray-50);
+        transform: translateY(0);
+        transition: transform 0.3s ease;
+    }
+
+    .service-icon {
+        margin-bottom: 1rem;
+        color: var(--color-accent);
+    }
+    .service-icon :global(svg) {
+        width: 32px;
+        height: 32px;
+    }
+
+    .service-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .service-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.5rem 0;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        opacity: 0.9;
+    }
+
+    .service-list li {
+        position: relative;
+        padding-left: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .service-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--color-accent);
+    }
+
+    .service-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        color: var(--color-accent);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        letter-spacing: 0.05em;
+        opacity: 1;
+        transition: color 0.3s ease;
+    }
+
+    .service-cta .arrow {
+        transition: transform 0.3s ease;
+    }
+
+    /* Interactions */
+    .service-card:hover .service-bg {
+        transform: scale(1.05); /* Slight zoom */
+    }
+
+    .service-card:hover .service-overlay {
+        opacity: 0.9;
+    }
+
+    .service-card:hover .service-cta {
+        color: #fff;
+    }
+
+    .service-card:hover .service-cta .arrow {
+        transform: translateX(4px);
+    }
+
+    /* --- METHODOLOGY SECTION --- */
+    .section-methodology {
+        padding: 5rem 0;
+        background-color: #fff;
+    }
+
+    .methodology-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Tablet: 2 cols, Desktop: 4 cols */
+    @media (min-width: 768px) {
+        .methodology-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (min-width: 1024px) {
+        .methodology-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    .method-card {
+        background-color: #fff;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .method-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        border-color: var(--color-accent);
+    }
+
+    .method-number {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #e0e0e0;
+        display: block;
+        margin-bottom: 0.5rem;
+        line-height: 1;
+        transition: color 0.3s ease;
+    }
+
+    .method-card:hover .method-number {
+        color: var(--color-accent);
+        opacity: 0.3;
+    }
+
+    .method-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--color-primary);
+    }
+
+    .method-desc {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--color-text-muted);
+    }
+
+    /* --- TECHNOLOGY SECTION --- */
+    .section-technology {
+        padding: 5rem 0;
+        background-color: #f0f2f5;
+    }
+
+    .technology-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .technology-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    .tech-card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tech-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .tech-image-wrapper {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+    }
+
+    .tech-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .tech-card:hover .tech-image-wrapper img {
+        transform: scale(1.05);
+        filter: brightness(1.05);
+    }
+
+    .tech-content {
+        padding: 2rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .tech-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--color-primary);
+    }
+
+    .tech-desc {
+        font-size: 1.125rem;
+        line-height: 1.6;
+        color: var(--color-text-muted);
+    }
+</style>

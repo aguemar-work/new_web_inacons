@@ -21,9 +21,9 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-body * {
+/* body * {
     outline: 1px solid red
-}
+} */
 
 h1,
 h2,

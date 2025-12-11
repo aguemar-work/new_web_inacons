@@ -1,0 +1,115 @@
+---
+interface Props {
+    subtitle?: string;
+    title: string;
+    description: string;
+    clients: string[]; // List of client names (using as placeholders if no images)
+}
+
+const { subtitle, title, description, clients } = Astro.props;
+---
+
+<section class="clients-section">
+    <div class="container">
+        <div class="clients-header">
+            {subtitle && <span class="subtitle">{subtitle}</span>}
+            <h2 class="title">{title}</h2>
+            <p class="description">{description}</p>
+        </div>
+
+        <div class="clients-grid">
+            {
+                clients.map((client) => (
+                    <div class="client-logo">
+                        {/* Placeholder for now - normally an <img> */}
+                        <span class="client-name">{client}</span>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .clients-section {
+        padding: 6rem 0;
+        background-color: #fff;
+        text-align: center;
+    }
+
+    .clients-header {
+        max-width: 800px;
+        margin: 0 auto 4rem auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .subtitle {
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        letter-spacing: 0.05em;
+    }
+
+    .title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        line-height: 1.1;
+    }
+
+    .description {
+        font-size: 1.125rem;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+    }
+
+    .clients-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .client-logo {
+        width: 100%;
+        height: 100px;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        filter: grayscale(100%);
+        opacity: 0.7;
+        transition: all 0.3s ease;
+        cursor: default;
+        padding: 1rem;
+    }
+
+    .client-logo:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .client-name {
+        font-weight: 600;
+        color: #888;
+    }
+
+    @media (min-width: 768px) {
+        .clients-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .clients-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+</style>
