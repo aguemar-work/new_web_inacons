@@ -1,16 +1,21 @@
 /* alias globales para usar en componente */
 :root {
+    /* --- DARK THEME (DEFAULT) --- */
     /* Backgrounds */
-    --background-default: var(--color-gray-50);
-    --background-surface: var(--color-gray-100);
+    --background-default: var(--color-brand-background);
+    /* #14172d */
+    --background-surface: var(--color-gray-800);
 
     /* Text */
-    --text-primary: var(--color-gray-900);
-    --text-secondary: var(--color-gray-600);
+    --text-primary: var(--color-gray-50);
+    --text-secondary: var(--color-gray-300);
+    --text-inverted: var(--color-brand-background);
+    /* Dark text on light elements */
 
     /* Brand */
     --brand: var(--color-brand-primary);
-    --brand-hover: var(--color-brand-secondary);
+    --brand-hover: #2c6e9c;
+    --brand-accent: var(--color-brand-accent);
 
     /* Radii */
     --radius-card: var(--radius-lg);
@@ -18,4 +23,30 @@
 
     /* Shadows */
     --shadow-card: var(--shadow-lg);
+
+    /* Elements */
+    --logo-filter: grayscale(100%) brightness(0) invert(1);
+    /* White */
+}
+
+/* --- LIGHT THEME OVERRIDE --- */
+[data-theme="light"] {
+    /* Backgrounds */
+    --background-default: var(--color-gray-50);
+    /* Light Gray */
+    --background-surface: #ffffff;
+
+    /* Text */
+    --text-primary: var(--color-brand-background);
+    /* Dark Blue */
+    --text-secondary: var(--color-gray-600);
+    --text-inverted: var(--color-gray-50);
+    /* Light text on dark elements */
+
+    /* Adjust shadows for light theme if needed */
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    /* Elements */
+    --logo-filter: grayscale(100%) brightness(0);
+    /* Black */
 }

@@ -79,7 +79,7 @@ const displayLogos = [...clientLogos, ...clientLogos];
 <style>
     .clients-carousel-section {
         padding: 6rem 0;
-        background-color: #fff;
+        background-color: var(--background-default); /* Was #fff */
         overflow: hidden; /* Hide overflow from carousel */
     }
 
@@ -112,12 +112,12 @@ const displayLogos = [...clientLogos, ...clientLogos];
         font-size: clamp(2rem, 4vw, 3rem);
         font-weight: 800;
         line-height: 1.1;
-        color: var(--color-text, #1a1a1a);
+        color: var(--text-primary); /* Was hardcoded */
     }
 
     .description {
         font-size: 1.125rem;
-        color: var(--color-text-muted, #4a4a4a);
+        color: var(--text-secondary); /* Was hardcoded */
         line-height: 1.6;
     }
 
@@ -172,7 +172,7 @@ const displayLogos = [...clientLogos, ...clientLogos];
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;
-        filter: grayscale(100%);
+        filter: var(--logo-filter); /* Theme-aware filter */
         opacity: 0.7;
         transition: all 0.3s ease;
         /* SEO best practice */
@@ -181,7 +181,7 @@ const displayLogos = [...clientLogos, ...clientLogos];
 
     /* Hover Effects on Logo */
     .logo-item:hover img {
-        filter: grayscale(0%);
+        filter: grayscale(0%); /* Full color on hover */
         opacity: 1;
         transform: scale(1.05); /* Micro-interaction: Scale */
     }

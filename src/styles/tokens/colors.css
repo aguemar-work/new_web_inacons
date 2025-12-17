@@ -11,10 +11,14 @@
     --color-gray-800: #1e293b;
     --color-gray-900: #0f172a;
 
-    /* Brand */
-    --color-brand-primary: #4f46e5;
+    /* Brand - User Specified */
+    --color-brand-background: #14172d;
+    --color-brand-primary: #1b5278;
+    --color-brand-accent: #d9822b;
+
+    /* Semantic Mappings */
     --color-brand-secondary: #9333ea;
-    --color-brand-accent: #0ea5e9;
+    /* Keeping this as backup or remove if unused */
 
     /* Semantic */
     --color-success: #22c55e;

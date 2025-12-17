@@ -1,8 +1,8 @@
-/* body, textos base, enlaces */
-
 @import "./reset.css";
 @import "./tokens/tokens.css";
 @import "./layout/container.css";
+@import "./components/buttons.css";
+/* Added Button System */
 @import "./utilities/utilities.css";
 
 html {
@@ -16,8 +16,8 @@ body {
     font-family: var(--font-primary);
     font-size: var(--text-base);
     line-height: var(--leading-normal);
-    color: var(--color-text);
-    background-color: var(--color-background);
+    color: var(--text-primary);
+    background-color: var(--background-default);
     text-rendering: optimizeLegibility;
 }
 

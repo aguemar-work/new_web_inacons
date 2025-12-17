@@ -26,13 +26,16 @@ const {
     mobileImagePosition = "top",
     id,
 } = Astro.props;
+
+// Default button for dark background is accent
+const buttonClass = "btn-accent";
 ---
 
 <section id={id} class="section">
     <div class="container section__grid">
         <!-- Image Wrapper -->
         <div
-            class="section__image-wrapper"
+            class="section__image-wrapper reveal-on-scroll"
             data-desktop-pos={imagePosition}
             data-mobile-pos={mobileImagePosition}
         >
@@ -45,7 +48,7 @@ const {
         </div>
 
         <!-- Content Wrapper -->
-        <div class="section__content">
+        <div class="section__content reveal-on-scroll reveal-delay-1">
             <div class="section__header">
                 {subtitle && <span class="section__subtitle">{subtitle}</span>}
                 <h2 class="section__title">{title}</h2>
@@ -53,7 +56,7 @@ const {
             <p class="section__description" set:html={description} />
             {
                 cta && (
-                    <a href={cta.href} class="btn-primary">
+                    <a href={cta.href} class={`btn ${buttonClass}`}>
                         {cta.label}
                     </a>
                 )
@@ -65,6 +68,7 @@ const {
 <style>
     .section {
         padding: 4rem 0;
+        /* Background is handled by parent/global theme */
     }
 
     .section__grid {
@@ -80,6 +84,7 @@ const {
         overflow: hidden;
         position: relative;
         aspect-ratio: 16/9;
+        box-shadow: var(--shadow-card);
     }
 
     .section__image {
@@ -114,7 +119,7 @@ const {
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: var(--color-brand-accent, #ffcc00);
+        color: var(--color-brand-accent, #d9822b);
         margin-bottom: 0.5rem;
     }
 
@@ -122,33 +127,16 @@ const {
         font-size: clamp(1.75rem, 4vw, 2.5rem);
         line-height: 1.1;
         font-weight: 800;
-        color: var(--color-text, #1a1a1a);
+        color: var(--text-primary);
     }
 
     .section__description {
         font-size: 1.125rem;
         line-height: 1.6;
-        color: var(--color-text-muted, #4a4a4a);
+        color: var(--text-secondary);
     }
 
-    .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.875rem 2rem;
-        background-color: var(--color-text, #000);
-        color: #fff;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 0.875rem;
-        border-radius: 4px;
-        transition: all 0.2s ease;
-        align-self: start;
-    }
-    .btn-primary:hover {
-        background-color: var(--color-brand-accent, #ffcc00);
-        color: #000;
-    }
+    /* Remove old btn-primary style as we use global classes now */
 
     /* --- Desktop (lg) --- */
     @media (min-width: 1024px) {

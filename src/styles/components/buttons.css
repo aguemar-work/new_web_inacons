@@ -1,0 +1,54 @@
+/* --- Button System --- */
+/* Base Button */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-button, 4px);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    line-height: 1;
+}
+
+/* Variant A: Dark Blue (For Light Backgrounds) */
+.btn-primary-a {
+    background-color: #14172d;
+    color: #ffffff;
+}
+
+.btn-primary-a:hover {
+    background-color: #1f2342;
+    /* Slightly lighter/different tone */
+    transform: translateY(-1px);
+}
+
+/* Variant B: Brand Blue (For Light Backgrounds) */
+.btn-primary-b {
+    background-color: #1b5278;
+    color: #ffffff;
+}
+
+.btn-primary-b:hover {
+    background-color: #236391;
+    /* Lighter */
+    transform: translateY(-1px);
+}
+
+/* Variant: Accent/Dark Mode (For Dark Backgrounds) */
+.btn-accent {
+    background-color: #d9822b;
+    color: #ffffff;
+}
+
+.btn-accent:hover {
+    background-color: #e6913e;
+    /* Lighter */
+    transform: translateY(-1px);
+}

@@ -12,7 +12,7 @@ const iconLinkedin = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`;
 ---
 
-<BaseLayout>
+<BaseLayout theme="light">
     <HeroPage
         variant="page"
         title="¿Listo para Construir con Confianza?"
@@ -37,30 +37,29 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
                     Estamos disponibles para atender tus consultas y proyectos.
                 </p>
 
-                <div class="info-blocks">
-                    <div class="info-item">
-                        <div class="icon-box" set:html={iconMail} />
-                        <div>
-                            <h3 class="info-label">Email Corporativo</h3>
-                            <a
-                                href="mailto:ventas@inacons.com"
-                                class="info-value">ventas@inacons.com</a
-                            >
-                        </div>
+                <div class="info-blocks-grid">
+                    <!-- Email Card -->
+                    <div class="contact-card">
+                        <div class="icon-wrapper" set:html={iconMail} />
+                        <h3 class="card-label">Email Corporativo</h3>
+                        <a href="mailto:ventas@inacons.com" class="card-value"
+                            >ventas@inacons.com</a
+                        >
                     </div>
 
-                    <div class="info-item">
-                        <div class="icon-box" set:html={iconPhone} />
-                        <div>
-                            <h3 class="info-label">Teléfono Principal</h3>
-                            <a href="tel:+51064654736" class="info-value"
-                                >+51 064 654 736</a
-                            >
-                        </div>
+                    <!-- Phone Card -->
+                    <div class="contact-card">
+                        <div class="icon-wrapper" set:html={iconPhone} />
+                        <h3 class="card-label">Teléfono Principal</h3>
+                        <a href="tel:+51064654736" class="card-value"
+                            >+51 064 654 736</a
+                        >
                     </div>
 
-                    <div class="info-item">
-                        <div class="icon-box" set:html={iconWhatsapp} />
+                    <!-- Social Card -->
+                    <div class="contact-card">
+                        <div class="icon-wrapper" set:html={iconWhatsapp} />
+                        <h3 class="card-label">Redes Sociales</h3>
                         <div class="social-links">
                             <a
                                 href="#"
@@ -166,7 +165,7 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
                             required
                             class="form-textarea"></textarea>
                     </div>
-                    <button type="submit" class="submit-btn"
+                    <button type="submit" class="btn btn-primary-b"
                         >Enviar mensaje</button
                     >
                 </form>
@@ -181,23 +180,19 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
             <div class="locations-info">
                 <h2 class="section-title">Nuestras Oficinas</h2>
 
-                <div class="office-block">
-                    <div class="icon-box" set:html={iconMapPin} />
-                    <div>
-                        <h3 class="office-title">Oficina Principal – Lima</h3>
-                        <p class="office-address">
+                <div class="info-blocks-grid">
+                    <div class="contact-card">
+                        <div class="icon-wrapper" set:html={iconMapPin} />
+                        <h3 class="card-label">Oficina Principal – Lima</h3>
+                        <p class="card-value">
                             Av. Las Casuarinas 256<br />Pucusana – Lima, Perú
                         </p>
                     </div>
-                </div>
 
-                <div class="office-block">
-                    <div class="icon-box" set:html={iconMapPin} />
-                    <div>
-                        <h3 class="office-title">
-                            Oficina Regional – Huancayo
-                        </h3>
-                        <p class="office-address">
+                    <div class="contact-card">
+                        <div class="icon-wrapper" set:html={iconMapPin} />
+                        <h3 class="card-label">Oficina Regional – Huancayo</h3>
+                        <p class="card-value">
                             Calle Casuarinas 112<br />El Tambo – Huancayo, Perú
                         </p>
                     </div>
@@ -248,7 +243,7 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
             </div>
 
             <div class="cta-wrapper">
-                <a href="#" class="channel-cta"
+                <a href="#" class="btn btn-primary-a"
                     >Ingresar al canal de comunicación</a
                 >
             </div>
@@ -257,14 +252,6 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
 </BaseLayout>
 
 <style>
-    /* VARS */
-    :root {
-        --color-brand-accent: #dba618;
-        --color-brand-primary: #1a1a1a;
-        --color-text-body: #4a4a4a;
-        --color-input-bg: #f5f5f5;
-    }
-
     .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -275,13 +262,13 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
     .section-locations,
     .section-channel {
         padding: 5rem 0;
-        background-color: #fff;
-        color: var(--color-text-body);
+        background-color: var(--background-default);
+        color: var(--text-secondary);
     }
 
     .section-locations {
-        background-color: #f8f9fa;
-        border-top: 1px solid #eee;
+        background-color: var(--background-surface);
+        border-top: 1px solid var(--color-gray-200);
     }
 
     .split-layout {
@@ -302,7 +289,7 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
         display: block;
         font-size: 0.875rem;
         font-weight: 700;
-        color: var(--color-brand-accent, #dba618);
+        color: var(--brand-accent);
         text-transform: uppercase;
         letter-spacing: 0.1em;
         margin-bottom: 1rem;
@@ -312,13 +299,13 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
         font-size: 2.25rem;
         font-weight: 800;
         margin-bottom: 1rem;
-        color: var(--color-brand-primary, #1a1a1a);
+        color: var(--text-primary);
         line-height: 1.1;
     }
 
     .section-desc {
         font-size: 1.125rem;
-        color: var(--color-text-body, #666);
+        color: var(--text-secondary);
         margin-bottom: 2.5rem;
         line-height: 1.6;
     }
@@ -333,52 +320,65 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
         max-width: 700px;
     }
 
-    /* INFO BLOCKS */
-    .info-blocks {
+    /* INFO CARDS GRID */
+    .info-blocks-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem; /* Space between cards */
+    }
+
+    @media (min-width: 640px) {
+        .info-blocks-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* CONTACT CARD STYLE */
+    .contact-card {
+        background: var(--background-surface);
+        border: 1px solid var(--color-gray-200);
+        border-radius: var(--radius-card);
+        padding: 1.5rem;
         display: flex;
         flex-direction: column;
-        gap: 2rem;
-    }
-
-    .info-item {
-        display: flex;
         align-items: flex-start;
         gap: 1rem;
+        transition: all 0.2s ease;
     }
 
-    .office-block {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-        margin-bottom: 2rem;
+    .contact-card:hover {
+        border-color: var(--brand-accent);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transform: translateY(-2px);
     }
 
-    .icon-box {
-        color: var(--color-brand-accent);
-        flex-shrink: 0;
-        margin-top: 0.25rem;
+    .icon-wrapper {
+        color: var(--brand-accent);
+        /* display: flex; align-items: center; justify-content: center; */
+    }
+    .icon-wrapper :global(svg) {
+        width: 24px;
+        height: 24px;
     }
 
-    .info-label,
-    .office-title {
-        font-size: 0.9rem;
+    .card-label {
+        font-size: 0.75rem;
         font-weight: 700;
-        color: #999;
         text-transform: uppercase;
-        margin-bottom: 0.25rem;
+        color: var(--text-secondary);
+        letter-spacing: 0.05em;
     }
 
-    .office-title {
-        color: var(--color-brand-primary);
-    }
-
-    .info-value,
-    .office-address {
+    .card-value {
         font-size: 1.125rem;
         font-weight: 600;
-        color: var(--color-brand-primary);
+        color: var(--text-primary);
         text-decoration: none;
-        line-height: 1.5;
+        line-height: 1.4;
+    }
+
+    .card-value:hover {
+        color: var(--brand-accent);
     }
 
     /* SOCIALS */
@@ -388,12 +388,12 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
     }
 
     .social-icon {
-        color: var(--color-brand-primary);
+        color: var(--text-primary);
         transition: color 0.3s ease;
     }
 
     .social-icon:hover {
-        color: var(--color-brand-accent);
+        color: var(--brand-accent);
     }
 
     /* FORM */
@@ -408,12 +408,12 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
     .form-textarea {
         width: 100%;
         padding: 1rem;
-        background-color: var(--color-input-bg);
+        background-color: var(--color-gray-100); /* Input bg */
         border: 1px solid transparent;
         border-radius: 8px;
         font-family: inherit;
         font-size: 1rem;
-        color: var(--color-brand-primary);
+        color: var(--text-primary);
         transition: border-color 0.3s ease;
     }
 
@@ -421,27 +421,8 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
     .form-select:focus,
     .form-textarea:focus {
         outline: none;
-        border-color: var(--color-brand-accent);
+        border-color: var(--brand-accent);
         background-color: #fff;
-    }
-
-    .submit-btn {
-        background-color: var(--color-brand-primary);
-        color: #fff;
-        padding: 1rem 2rem;
-        font-size: 1rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        align-self: flex-start;
-    }
-
-    .submit-btn:hover {
-        background-color: var(--color-brand-accent);
-        color: #1a1a1a;
     }
 
     /* MAP */
@@ -450,7 +431,7 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
         height: 100%;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--shadow-card);
     }
 
     /* CHANNEL */
@@ -476,11 +457,11 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
     }
 
     .channel-card {
-        background: #f8f9fa;
+        background: var(--background-surface);
         padding: 2rem;
         border-radius: 12px;
         text-align: center;
-        border: 1px solid #eee;
+        border: 1px solid var(--color-gray-200);
         transition:
             transform 0.3s ease,
             border-color 0.3s ease;
@@ -488,34 +469,23 @@ const iconChannel = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="
 
     .channel-card:hover {
         transform: translateY(-5px);
-        border-color: var(--color-brand-accent);
+        border-color: var(--brand-accent);
     }
 
     .channel-icon {
-        color: var(--color-brand-accent);
+        color: var(--brand-accent);
         margin-bottom: 1rem;
     }
 
     .channel-label {
         font-size: 1.125rem;
         font-weight: 700;
-        color: var(--color-brand-primary);
+        color: var(--text-primary);
     }
 
-    .channel-cta {
-        display: inline-block;
-        background-color: var(--color-brand-accent);
-        color: #1a1a1a;
-        padding: 1rem 3rem;
-        font-weight: 700;
-        text-decoration: none;
-        border-radius: 50px;
-        text-transform: uppercase;
-        transition: filter 0.3s ease;
-    }
-
-    .channel-cta:hover {
-        filter: brightness(1.1);
+    .cta-wrapper {
+        display: flex;
+        justify-content: center;
     }
 
     .sr-only {

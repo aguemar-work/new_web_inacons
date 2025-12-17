@@ -11,7 +11,7 @@ const services = [
             "Estructuras de concreto armado y acero",
             "Rehabilitación y remodelación de infraestructuras",
         ],
-        image: "/images/image_nosotros.webp",
+        image: "/images/imagenes/image_obra_civiles.webp",
         link: "/operaciones/obras-civiles",
     },
     {
@@ -22,7 +22,7 @@ const services = [
             "Sistemas de drenaje y alcantarillado",
             "Obras portuarias y aeroportuarias",
         ],
-        image: "/images/hero/hero_poster.webp",
+        image: "/images/imagenes/image_infraestructura.webp",
         link: "/operaciones/infraestructura",
     },
     {
@@ -33,7 +33,7 @@ const services = [
             "Sistemas de automatización y control",
             "Mantenimiento de equipos electromecánicos",
         ],
-        image: "/images/image_nosotros.webp",
+        image: "/images/imagenes/image_electromecanica.webp",
         link: "/operaciones/electromecanica",
     },
     {
@@ -44,7 +44,7 @@ const services = [
             "Sistemas de riego automatizado",
             "Mantenimiento de espacios paisajísticos",
         ],
-        image: "/images/hero/hero_poster.webp",
+        image: "/images/imagenes/image_paisajismo.webp",
         link: "/operaciones/paisajismo",
     },
     {
@@ -55,7 +55,7 @@ const services = [
             "Instalaciones de procesamiento de minerales",
             "Sistemas de transporte y almacenamiento",
         ],
-        image: "/images/image_nosotros.webp",
+        image: "/images/imagenes/image_mineria.webp",
         link: "/operaciones/mineria",
     },
     {
@@ -66,7 +66,7 @@ const services = [
             "Supervisión y control de calidad",
             "Gestión de proyectos y planificación",
         ],
-        image: "/images/hero/hero_poster.webp",
+        image: "/images/imagenes/image_consultoría.webp",
         link: "/operaciones/consultoria",
     },
 ];
@@ -103,18 +103,18 @@ const technology = [
         title: "Tecnología Aplicada a Supervisión y Control",
         description:
             "Supervisión Inteligente – Control de Asistencia – Documentos Digitales – Drones – Lidar",
-        image: "/images/image_nosotros.webp",
+        image: "/images/imagenes/tecnologia_control.jpg",
     },
     {
         title: "Tecnología BIM",
         description:
             "Impulsamos la gestión integral de proyectos con tecnología BIM, mejorando eficiencia en cada etapa del proceso.",
-        image: "/images/hero/hero_poster.webp",
+        image: "/images/imagenes/tecnologia_bim.jpg",
     },
 ];
 ---
 
-<BaseLayout>
+<BaseLayout theme="light">
     <HeroPage
         variant="page"
         title="Valor Agregado en Cada Fase del Proyecto"
@@ -122,7 +122,7 @@ const technology = [
         content="En INACONS, transformamos conceptos en realidad con calidad excepcional, seguridad y eficiencia probada. Guiamos cada proyecto desde la asesoría técnica inicial hasta la implementación final de soluciones complejas, asegurando que cada etapa no solo cumpla con los planos, sino que construya valor tangible y consolide la confianza con nuestros clientes."
         background={{
             type: "image",
-            src: "/images/image_nosotros.webp",
+            src: "/images/imagenes/image_heroprincipal.webp",
             alt: "Operaciones",
         }}
         breadcrumbs={[{ label: "Inicio", url: "/" }, { label: "Operaciones" }]}
@@ -228,13 +228,13 @@ const technology = [
         font-weight: 800;
         text-align: center;
         margin-bottom: 3rem;
-        color: var(--color-primary);
+        color: var(--text-primary);
     }
 
     /* --- SERVICES SECTION --- */
     .section-services {
         padding: 5rem 0;
-        background-color: #f8f9fa;
+        background-color: var(--background-default);
     }
 
     .services-grid {
@@ -295,14 +295,14 @@ const technology = [
         position: relative;
         z-index: 3;
         padding: 2rem;
-        color: var(--color-gray-50);
+        color: var(--color-gray-50); /* Force light text on dark card */
         transform: translateY(0);
         transition: transform 0.3s ease;
     }
 
     .service-icon {
         margin-bottom: 1rem;
-        color: var(--color-accent);
+        color: var(--brand-accent);
     }
     .service-icon :global(svg) {
         width: 32px;
@@ -335,7 +335,7 @@ const technology = [
         content: "•";
         position: absolute;
         left: 0;
-        color: var(--color-accent);
+        color: var(--brand-accent);
     }
 
     .service-cta {
@@ -343,7 +343,7 @@ const technology = [
         align-items: center;
         gap: 0.5rem;
         font-weight: 600;
-        color: var(--color-accent);
+        color: var(--brand-accent);
         text-decoration: none;
         text-transform: uppercase;
         font-size: 0.875rem;
@@ -376,7 +376,7 @@ const technology = [
     /* --- METHODOLOGY SECTION --- */
     .section-methodology {
         padding: 5rem 0;
-        background-color: #fff;
+        background-color: var(--background-surface);
     }
 
     .methodology-grid {
@@ -398,8 +398,8 @@ const technology = [
     }
 
     .method-card {
-        background-color: #fff;
-        border: 1px solid #eee;
+        background-color: var(--background-surface);
+        border: 1px solid var(--color-gray-200); /* Use specific token for border */
         border-radius: 12px;
         padding: 2rem;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
@@ -411,13 +411,13 @@ const technology = [
     .method-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-        border-color: var(--color-accent);
+        border-color: var(--brand-accent);
     }
 
     .method-number {
         font-size: 3rem;
         font-weight: 800;
-        color: #e0e0e0;
+        color: var(--color-gray-300);
         display: block;
         margin-bottom: 0.5rem;
         line-height: 1;
@@ -425,7 +425,7 @@ const technology = [
     }
 
     .method-card:hover .method-number {
-        color: var(--color-accent);
+        color: var(--brand-accent);
         opacity: 0.3;
     }
 
@@ -433,19 +433,19 @@ const technology = [
         font-size: 1.25rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        color: var(--color-primary);
+        color: var(--text-primary);
     }
 
     .method-desc {
         font-size: 1rem;
         line-height: 1.6;
-        color: var(--color-text-muted);
+        color: var(--text-secondary);
     }
 
     /* --- TECHNOLOGY SECTION --- */
     .section-technology {
         padding: 5rem 0;
-        background-color: #f0f2f5;
+        background-color: var(--background-default);
     }
 
     .technology-grid {
@@ -461,7 +461,7 @@ const technology = [
     }
 
     .tech-card {
-        background: #fff;
+        background: var(--background-surface);
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
@@ -504,7 +504,7 @@ const technology = [
         font-size: 1.5rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        color: var(--color-primary);
+        color: var(--text-primary);
     }
 
     .tech-desc {

@@ -19,8 +19,8 @@ const services = [
                 <li>Habilitaciones urbanas.</li>
             </ul>
         `,
-        bannerImage: "/images/hero/hero_poster.webp", // Placeholder
-        portfolioFile: "/docs/portafolios/obras-civiles.pdf",
+        bannerImage: "/images/imagenes/image_obra_civiles.webp",
+        portfolioFile: "/pdf/3 -PORTAFOLIO_OBRAS CIVILES.pdf",
         relatedProjects: [
             {
                 title: "Complejo Residencial 'Los Álamos'",
@@ -29,10 +29,6 @@ const services = [
             {
                 title: "Edificio Corporativo Inceptio",
                 slug: "edificio-inceptio",
-            },
-            {
-                title: "Habilitación Urbana 'Verde Horizonte'",
-                slug: "habilitacion-verde-horizonte",
             },
         ],
     },
@@ -45,8 +41,8 @@ const services = [
             <p>Desarrollamos proyectos de infraestructura vial y logística que impulsan el desarrollo económico y social. Nuestra experiencia abarca la construcción de carreteras, puentes y accesos en geografías desafiantes.</p>
             <p>Utilizamos tecnología de punta y maquinaria especializada para asegurar la eficiencia y sostenibilidad de nuestras obras, cumpliendo con todas las normativas técnicas y ambientales vigentes.</p>
         `,
-        bannerImage: "/images/hero/hero_poster.webp",
-        portfolioFile: "/docs/portafolios/infraestructura.pdf",
+        bannerImage: "/images/imagenes/image_infraestructura.webp",
+        portfolioFile: "/pdf/1 -PORTAFOLIO MOV. TIERRAS.pdf",
         relatedProjects: [
             {
                 title: "Carretera Interoceánica Tramo 4",
@@ -62,16 +58,12 @@ const services = [
         descriptionPage: `
             <p>Ofrecemos servicios especializados en montaje electromecánico, instalación de subestaciones y sistemas de automatización industrial. Garantizamos la operatividad y seguridad de sus activos críticos.</p>
         `,
-        bannerImage: "/images/hero/hero_poster.webp",
-        portfolioFile: "/docs/portafolios/electromecanica.pdf",
+        bannerImage: "/images/imagenes/image_electromecanica.webp",
+        portfolioFile: "/pdf/2 -PORTAFOLIO_SERV.ELECTROMECANICO.pdf",
         relatedProjects: [
             {
                 title: "Subestación Eléctrica Moyobamba",
                 slug: "subestacion-moyobamba",
-            },
-            {
-                title: "Automatización Faja Transportadora",
-                slug: "automatizacion-faja",
             },
         ],
     },
@@ -82,8 +74,8 @@ const services = [
         descriptionPage: `
             <p>Transformamos espacios mediante el diseño y ejecución de proyectos paisajísticos que armonizan con el entorno. Desde parques públicos hasta áreas verdes corporativas.</p>
         `,
-        bannerImage: "/images/hero/hero_poster.webp",
-        portfolioFile: "/docs/portafolios/paisajismo.pdf",
+        bannerImage: "/images/imagenes/image_paisajismo.webp",
+        portfolioFile: "/pdf/5 -PORTAFOLIO_PAISAJISMO.pdf",
         relatedProjects: [
             { title: "Parque Lineal del Río", slug: "parque-lineal-rio" },
         ],
@@ -95,8 +87,8 @@ const services = [
         descriptionPage: `
             <p>Proveemos soporte integral a la minería con la construcción de campamentos, plantas de tratamiento y obras civiles en alta montaña, siempre bajo estrictos protocolos de seguridad.</p>
         `,
-        bannerImage: "/images/hero/hero_poster.webp",
-        portfolioFile: "/docs/portafolios/mineria.pdf",
+        bannerImage: "/images/imagenes/image_mineria.webp",
+        portfolioFile: "", // Pending specific portfolio
         relatedProjects: [
             {
                 title: "Planta de Tratamiento Mina Justa",
@@ -112,8 +104,8 @@ const services = [
         descriptionPage: `
             <p>Brindamos servicios de consultoría en ingeniería, gestión de proyectos y supervisión de obras, asegurando la viabilidad técnica y económica de sus inversiones.</p>
         `,
-        bannerImage: "/images/hero/hero_poster.webp",
-        portfolioFile: "/docs/portafolios/consultoria.pdf",
+        bannerImage: "/images/imagenes/image_consultoría.webp",
+        portfolioFile: "/pdf/4 -PORTAFOLIO_DISEÑO.pdf",
         relatedProjects: [],
     },
 ];
@@ -153,7 +145,7 @@ const iconPdf = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
 const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
 
-<BaseLayout>
+<BaseLayout theme="light">
     <!-- Hero Component -->
     <HeroPage
         variant="project"
@@ -177,7 +169,10 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
         <div class="service-layout">
             <!-- Left Column: Service Information -->
             <main class="service-content">
-                <h1 class="page-title">{currentService.title}</h1>
+                <header class="content-header">
+                    <h1 class="page-title">{currentService.title}</h1>
+                    <div class="title-underline"></div>
+                </header>
 
                 <div
                     class="description-block"
@@ -187,7 +182,7 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
                 {
                     currentService.relatedProjects.length > 0 && (
                         <div class="related-projects">
-                            <h2 class="related-title">Proyectos asociados</h2>
+                            <h2 class="related-title">Proyectos destacados</h2>
                             <ul class="projects-list">
                                 {currentService.relatedProjects.map(
                                     (project) => (
@@ -217,31 +212,30 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
             <aside class="service-aside">
                 <!-- Card 1: Downloads -->
                 <div class="aside-card downloads-card">
-                    <h3 class="aside-title">Opciones de descarga</h3>
+                    <h3 class="aside-title">Recursos</h3>
                     <div class="download-links">
                         <a
-                            href="/docs/brochure-general.pdf"
+                            href="/pdf/brochure_inacons.pdf"
                             target="_blank"
-                            class="download-btn"
+                            class="btn-download"
                         >
                             <span class="btn-icon" set:html={iconPdf} />
-                            <span class="btn-text">Brochure General</span>
+                            <span class="btn-text">Brochure Corporativo</span>
                         </a>
                         <a
                             href={currentService.portfolioFile}
                             target="_blank"
-                            class="download-btn secondary"
+                            class="btn-download secondary"
                         >
                             <span class="btn-icon" set:html={iconPdf} />
-                            <span class="btn-text">Portafolio del Servicio</span
-                            >
+                            <span class="btn-text">Portafolio Específico</span>
                         </a>
                     </div>
                 </div>
 
                 <!-- Card 2: Other Services -->
                 <div class="aside-card nav-card">
-                    <h3 class="aside-title">Otros servicios</h3>
+                    <h3 class="aside-title">Otras Operaciones</h3>
                     <nav class="services-nav">
                         <ul>
                             {
@@ -269,8 +263,8 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
     .service-container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 5rem 1.5rem;
-        background-color: #fff;
+        padding: 6rem 1.5rem; /* Increased top padding for better breathing room */
+        background-color: var(--background-default);
     }
 
     .service-layout {
@@ -281,25 +275,36 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
 
     @media (min-width: 992px) {
         .service-layout {
-            grid-template-columns: 7fr 3fr; /* 70% - 30% split */
-            gap: 5rem;
+            grid-template-columns: 1fr 340px; /* Editorial proportions: Content + Fixed Sidebar */
+            gap: 6rem;
         }
     }
 
     /* LEFT COLUMN: CONTENT */
+    .content-header {
+        margin-bottom: 2.5rem;
+    }
+
     .page-title {
         font-size: 2.5rem;
         font-weight: 800;
-        color: var(--color-brand-primary, #1a1a1a);
-        margin-bottom: 2rem;
-        line-height: 1.2;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+    }
+
+    .title-underline {
+        width: 60px;
+        height: 4px;
+        background-color: var(--brand-accent);
     }
 
     .description-block {
         font-size: 1.125rem;
-        line-height: 1.7;
-        color: var(--color-text-body, #4a4a4a);
-        margin-bottom: 3rem;
+        line-height: 1.8; /* Better readability */
+        color: var(--text-secondary);
+        margin-bottom: 4rem;
     }
 
     /* Use :global because HTML is inserted via set:html */
@@ -307,28 +312,47 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
         margin-bottom: 1.5rem;
     }
 
+    .description-block :global(strong) {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
     .description-block :global(ul) {
-        margin-bottom: 1.5rem;
-        padding-left: 1.5rem;
+        margin-bottom: 2rem;
+        padding-left: 1.25rem;
+        list-style: none; /* Custom bullets */
     }
 
     .description-block :global(li) {
-        margin-bottom: 0.5rem;
-        list-style-type: disc;
+        margin-bottom: 0.75rem;
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .description-block :global(li::before) {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--brand-accent);
+        font-size: 1.2em;
+        line-height: 1;
+        top: 2px;
     }
 
     /* Related Projects */
     .related-projects {
         margin-top: 4rem;
-        border-top: 1px solid #eee;
-        padding-top: 2rem;
+        padding-top: 3rem;
+        border-top: 1px solid var(--color-gray-200);
     }
 
     .related-title {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
         margin-bottom: 1.5rem;
-        color: var(--color-brand-primary, #1a1a1a);
+        color: var(--text-primary);
     }
 
     .projects-list {
@@ -338,7 +362,7 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
     }
 
     .projects-list li {
-        border-bottom: 1px solid #f5f5f5;
+        border-bottom: 1px solid var(--color-gray-100);
     }
 
     .projects-list li:last-child {
@@ -349,27 +373,32 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 0;
+        padding: 1rem 0.5rem;
         text-decoration: none;
-        color: var(--color-text-body, #444);
-        transition: color 0.3s ease;
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+        border-radius: 4px;
     }
 
     .project-link:hover {
-        color: var(--color-brand-accent, #dba618);
+        color: var(--brand);
+        background-color: var(--color-gray-50);
+        padding-left: 1rem;
     }
 
     .project-name {
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .link-icon {
-        color: var(--color-brand-accent, #dba618);
+        color: var(--brand-accent);
         transition: transform 0.3s ease;
+        opacity: 0.7;
     }
 
     .project-link:hover .link-icon {
-        transform: translateX(5px);
+        transform: translateX(4px);
+        opacity: 1;
     }
 
     /* RIGHT COLUMN: ASIDE */
@@ -380,22 +409,22 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
     }
 
     .aside-card {
-        background-color: #f8f9fa;
-        border: 1px solid #eee;
-        border-radius: 8px;
+        background-color: var(--background-surface);
+        border: 1px solid var(--color-gray-200);
+        border-radius: var(--radius-card);
         padding: 2rem;
+        box-shadow: var(--shadow-card);
     }
 
     .aside-title {
-        font-size: 1.125rem;
+        font-size: 0.875rem;
         font-weight: 700;
-        color: var(--color-brand-primary, #1a1a1a);
+        color: var(--text-primary);
         margin-bottom: 1.5rem;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid var(--color-brand-accent, #dba618);
-        display: inline-block;
+        letter-spacing: 0.1em;
+        border-bottom: 1px solid var(--color-gray-200);
+        padding-bottom: 1rem;
     }
 
     /* Downloads */
@@ -405,37 +434,46 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
         gap: 1rem;
     }
 
-    .download-btn {
+    .btn-download {
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        padding: 0.75rem 1rem;
-        background-color: var(--color-brand-primary, #1a1a1a);
+        padding: 1rem;
+        background-color: var(--brand); /* Brand Blue */
         color: #fff;
         text-decoration: none;
-        border-radius: 6px;
-        font-size: 0.9rem;
+        border-radius: var(--radius-button);
+        font-size: 0.875rem;
         font-weight: 600;
-        transition: background-color 0.3s ease;
+        transition: all 0.2s ease;
+        line-height: 1.2;
     }
 
-    .download-btn:hover {
-        background-color: #333;
+    .btn-download:hover {
+        background-color: var(--brand-hover);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
 
-    .download-btn.secondary {
-        background-color: #fff;
-        color: var(--color-brand-primary, #1a1a1a);
-        border: 1px solid #ddd;
+    .btn-download.secondary {
+        background-color: transparent;
+        color: var(--text-primary);
+        border: 1px solid var(--color-gray-300);
     }
 
-    .download-btn.secondary:hover {
-        background-color: #f0f0f0;
-        border-color: #ccc;
+    .btn-download.secondary:hover {
+        background-color: var(--color-gray-50);
+        border-color: var(--brand);
+        color: var(--brand);
     }
 
     .btn-icon {
-        color: var(--color-brand-accent, #dba618);
+        color: inherit;
+        opacity: 0.9;
+    }
+
+    .btn-download.secondary .btn-icon {
+        color: var(--brand-accent);
     }
 
     /* Services Nav */
@@ -448,16 +486,23 @@ const iconArrowRight = `<svg xmlns="http://www.w3.org/2000/svg" width="16" heigh
     .nav-link {
         display: block;
         padding: 0.75rem 0;
-        color: #666;
+        color: var(--text-secondary);
         text-decoration: none;
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--color-gray-100);
         transition: all 0.2s ease;
+        font-size: 0.95rem;
     }
 
     .nav-link:hover {
-        color: var(--color-brand-accent, #dba618);
-        padding-left: 5px;
-        border-bottom-color: var(--color-brand-accent, #dba618);
+        color: var(--brand);
+        padding-left: 0.5rem;
+        border-bottom-color: var(--brand-accent);
+    }
+
+    .nav-link.active {
+        /* If we were marking active state */
+        font-weight: 600;
+        color: var(--brand);
     }
 
     .services-nav li:last-child .nav-link {

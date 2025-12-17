@@ -43,9 +43,11 @@ const { slides } = Astro.props;
                                     <p class="slide-desc">
                                         {slide.description}
                                     </p>
-                                    <a href={slide.cta.href} class="slide-cta">
+                                    <a
+                                        href={slide.cta.href}
+                                        class="btn btn-accent"
+                                    >
                                         {slide.cta.label}
-                                        <span class="arrow">→</span>
                                     </a>
                                 </div>
                             </div>
@@ -103,21 +105,22 @@ const { slides } = Astro.props;
 <style>
     .value-carousel {
         padding: 5rem 0;
-        background-color: var(
-            --color-surface-soft,
-            #f8f9fa
-        ); /* Light background for contrast */
+        background-color: var(--background-default);
         overflow: hidden;
+        /* Define Swiper theme colors locally */
+        --swiper-theme-color: var(--brand-accent);
+        --swiper-navigation-color: var(--text-primary);
+        --swiper-pagination-bullet-inactive-color: var(--text-secondary);
     }
 
     .slide-grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 2rem;
-        background: #fff;
+        background: var(--background-surface);
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
     .slide-image {
@@ -135,33 +138,21 @@ const { slides } = Astro.props;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 1rem;
+        gap: 1.5rem; /* Increased gap */
+        align-items: flex-start; /* Align button to left */
     }
 
     .slide-title {
         font-size: 1.75rem;
         font-weight: 700;
-        color: var(--color-text);
+        color: var(--text-primary);
+        line-height: 1.2;
     }
 
     .slide-desc {
-        color: var(--color-text-muted);
+        color: var(--text-secondary);
         font-size: 1rem;
         line-height: 1.6;
-    }
-
-    .slide-cta {
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 0.875rem;
-        color: var(--color-text);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: color 0.2s;
-    }
-    .slide-cta:hover {
-        color: var(--color-brand-accent, #ffcc00);
     }
 
     /* Swiper Controls overrides */
@@ -179,10 +170,17 @@ const { slides } = Astro.props;
     .swiper-button-next {
         position: static;
         margin: 0;
-        color: var(--color-text);
+        color: var(--text-primary);
         width: 40px;
         height: 40px;
+        transition: color 0.2s;
     }
+
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
+        color: var(--brand-accent);
+    }
+
     .swiper-button-prev::after,
     .swiper-button-next::after {
         font-size: 1.25rem;

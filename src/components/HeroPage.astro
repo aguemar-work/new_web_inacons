@@ -79,7 +79,7 @@ const TitleTag = "h1";
         {
             /* --- 1. HOME HERO LAYOUT --- */
             isHome && (
-                <div class="hero__content hero__content--home">
+                <div class="hero__content hero__content--home reveal-on-scroll">
                     <div class="hero__titles">
                         <TitleTag
                             id="hero-title"
@@ -97,7 +97,7 @@ const TitleTag = "h1";
                         <div class="hero__indicators">
                             {indicators.map((indicator) => (
                                 <div class="indicator">
-                                    <span class="indicator__value">
+                                    <span class="indicator__value animate-number">
                                         {indicator.value}
                                     </span>
                                     <span class="indicator__label">
@@ -259,6 +259,7 @@ const TitleTag = "h1";
         text-transform: uppercase;
         margin-bottom: 1.5rem;
         text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        color: #ffffff !important; /* Force white text for contrast */
     }
     .hero__title--home .d-block {
         display: block;
@@ -269,6 +270,7 @@ const TitleTag = "h1";
         opacity: 0.9;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         margin: 0 auto;
+        color: #ffffff !important; /* Force white text */
     }
 
     /* Home Indicators */
